@@ -23,7 +23,7 @@
     border: 1px solid black;
     position:absolute;
     border-radius: 10%;
-    box-shadow: 10px 10px 0 0 #ff0000;
+    box-shadow: 20px 20px 0 0 #ff0000;
 }
 #verso{
     background-color: rgb(255, 255, 255);
