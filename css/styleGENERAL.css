@@ -3,7 +3,8 @@
     perspective: 600px;
     width: 200px;
     height: 200px;
-    float: left
+    float: left;
+    margin: 0 15px 15px 0
 }
 .carta{
     transform-style: preserve-3d; /*Para os lados aparecerem em 3D*/
@@ -11,7 +12,8 @@
     position:relative;
     width: 100%;
     height: 100%;
-    float:left
+    float:left;
+     
 }
 .lado{
     backface-visibility: hidden; /* Para o lado de trás não aparecer*/
@@ -23,7 +25,7 @@
     border: 1px solid black;
     position:absolute;
     border-radius: 10%;
-    box-shadow: 20px 20px 0 0 #ff0000;
+    box-shadow: 10px 10px 0 0 #aaa;
 }
 [id^=verso]{
     background-color: rgb(255, 255, 255);
@@ -39,6 +41,6 @@ p{
     text-align: center;
 }
 #jogoMemoria{
-    width: 1224px;
-    height: 1224px;
+    width: 1299px;
+    height: 1299px;
 }
