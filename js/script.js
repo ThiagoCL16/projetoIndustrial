@@ -27,6 +27,7 @@ for(i=0; i<36; i++) {
     frente[i] = document.createElement('div')
     frente[i].className = 'lado'
     frente[i].id = `frente${i}`
+    frente[i].innerHTML = `<p>Carta ${i+1}</p>`
     carta[i].appendChild(frente[i])
 
     verso[i] = document.createElement('div')
