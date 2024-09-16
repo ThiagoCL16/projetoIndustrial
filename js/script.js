@@ -6,11 +6,12 @@ img[1] = '<img src="img/cachorro.png">';
 
 let jogoMemoria = document.getElementById('jogoMemoria');
 
+// Criando as cartas
 let container = new Array(36)
 let carta = new Array(36)
 let frente = new Array(36)
 let verso = new Array(36)
-for(i=0; i<36; i++) {
+for(i=0; i<36; i++) { //laco da base das cartas
     
     /*jogoMemoria.innerHTML += `<div class="container"><div class="carta"><div class="lado" id="frente${i}" tabindex="${i}"><p>carta ${i}</p></div><div class="lado" id="verso${i}"><img src="img/gato.png" title="gato" alt="gato"></div></div></div>`*/
     
@@ -20,8 +21,9 @@ for(i=0; i<36; i++) {
     jogoMemoria.appendChild(container[i]) // "Acrescentar filho" - este método adiciona o elemento entre parênteses dentro do elemento pai 
 
     carta[i] = document.createElement('div')
-    carta[i].className = 'carta'
-    carta[i].setAttribute('tabindex', i+1)
+    carta[i].className = 'carta' //nomeda classe no elemento
+    carta[i].setAttribute('tabindex', i+1) //cria atributo 
+    carta[i].setAttribute('onkeypress', 'giraCarta()')// com o atributo criado, a outra virgula e um valor dele
     container[i].appendChild(carta[i])
 
     frente[i] = document.createElement('div')
@@ -45,17 +47,32 @@ for(let i=0; i<4; i++) {
 
 
 for(let carta of cartas) {
-    function giraCarta() {
+    function giraCarta(){
         carta.style.transform = 'rotateY(180deg)'
+        setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function corpo conciso
     }
+    carta.onkeypress = function(event) {
+        let key = event.key
+        if(key == 'Enter'){ // Código da tecla enter
+            giraCarta()
+        }
+    }
+    
     carta.onclick = giraCarta
-    //carta.addEventListener('keydown', giraCarta, true)
+
+    // Função apenas para testes
+    function giraCartas(){
+        for(let carta of cartas){
+            carta.style.transform = 'rotateY(180deg)'
+            setTimeout(voltaCartas = () => carta.style.transform = 'rotateY(0)', 5000) 
+        }
+    }
 }
     
 
 for(let i=0; i<18; i++){
     nImg = Math.floor(Math.random() * 18);
-    while(img[nImg] === ""){
+    while(img[nImg] == ""){
         nImg = Math.floor(Math.random() * 18);
     }
     for(let j=0; j<2; j++){
