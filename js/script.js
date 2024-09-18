@@ -1,8 +1,8 @@
 //Math.random() - gera um numero aleatorio
 //array
 let img = new Array(36)
-img[0] = '<img src="img/gato.png">';
-img[1] = '<img src="img/cachorro.png">';
+img[0] = '<img src="img/gato.png" data-description="gato">';
+img[1] = '<img src="img/cachorro.png" data-description="cachorro">';
 
 let jogoMemoria = document.getElementById('jogoMemoria');
 
@@ -11,6 +11,8 @@ let container = new Array(36)
 let carta = new Array(36)
 let frente = new Array(36)
 let verso = new Array(36)
+let p = new Array(36)
+let texto = new Array(36)
 for(i=0; i<36; i++) { //laco da base das cartas
     
     /*jogoMemoria.innerHTML += `<div class="container"><div class="carta"><div class="lado" id="frente${i}" tabindex="${i}"><p>carta ${i}</p></div><div class="lado" id="verso${i}"><img src="img/gato.png" title="gato" alt="gato"></div></div></div>`*/
@@ -29,14 +31,20 @@ for(i=0; i<36; i++) { //laco da base das cartas
     frente[i] = document.createElement('div')
     frente[i].className = 'lado'
     frente[i].id = `frente${i}`
-    frente[i].innerHTML = `<p>Carta ${i+1}</p>`
+    p[i] = document.createElement('p')
+    texto[i] = `Carta ${i+1}`
+    frente[i].appendChild(p[i])
+    frente[i].setAttribute('data-description', texto)
+    p[i].innerHTML = texto[i]
+    
     carta[i].appendChild(frente[i])
 
     verso[i] = document.createElement('div')
     verso[i].className = 'lado'
     verso[i].id = `verso${i}`
     carta[i].appendChild(verso[i])
-}
+    texto[i] = ""
+    }
 
 let cartas = document.getElementsByClassName('carta');
 
@@ -48,6 +56,9 @@ for(let i=0; i<4; i++) {
 
 for(let carta of cartas) {
     function giraCarta(){
+        let audio = new Audio('audio/cartagiro.mp3')
+        audio.play()
+        speechSynthesis.speak(enunciado)
         carta.style.transform = 'rotateY(180deg)'
         setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function corpo conciso
     }
@@ -84,3 +95,18 @@ for(let i=0; i<18; i++){
     }
     img[nImg] = ""
 }
+function lerDescricao(elemento) {
+    speechSynthesis.cancel() //Remove todos os enunciados da fila de enunciados
+    const descricao = elemento.dataset.description;//
+    const enunciado = new SpeechSynthesisUtterance(descricao);
+    speechSynthesis.speak(enunciado);
+  }
+
+  const elementosComDescricao = document.querySelectorAll('[data-description]');
+
+  elementosComDescricao.forEach(elemento => {
+    elemento.onmouseover =  function(){
+      lerDescricao(elemento);
+    }
+    
+});
