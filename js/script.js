@@ -1,19 +1,19 @@
 //Math.random() - gera um numero aleatorio
 //array
-let img = new Array(36)
+let img = new Array(18)
 img[0] = '<img src="img/gato.png" data-description="gato">';
 img[1] = '<img src="img/cachorro.png" data-description="cachorro">';
 
 let jogoMemoria = document.getElementById('jogoMemoria');
 
 // Criando as cartas
-let container = new Array(36)
-let carta = new Array(36)
-let frente = new Array(36)
-let verso = new Array(36)
-let p = new Array(36)
-let texto = new Array(36)
-for(i=0; i<36; i++) { //laco da base das cartas
+let container = new Array(18)
+let carta = new Array(18)
+let frente = new Array(18)
+let verso = new Array(18)
+let p = new Array(18)
+let texto = new Array(18)
+for(i=0; i<18; i++) { //laco da base das cartas
     
     /*jogoMemoria.innerHTML += `<div class="container"><div class="carta"><div class="lado" id="frente${i}" tabindex="${i}"><p>carta ${i}</p></div><div class="lado" id="verso${i}"><img src="img/gato.png" title="gato" alt="gato"></div></div></div>`*/
     
@@ -56,10 +56,10 @@ for(let i=0; i<4; i++) {git
 
 for(let carta of cartas) {
     function giraCarta(){
-        let audio = new Audio('audio/cartagiro.mp3')
+        let audio = new Audio('audio/cartagiro2.mp3')
         audio.play()
         carta.style.transform = 'rotateY(180deg)'
-        setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function corpo conciso
+        setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 17 * 1000) // voltaCarta: arrow function corpo conciso
     }
     carta.onkeypress = function(event) {
         let key = event.key
@@ -80,15 +80,15 @@ for(let carta of cartas) {
 }
     
 
-for(let i=0; i<18; i++){
-    nImg = Math.floor(Math.random() * 18);
+for(let i=0; i<9; i++){
+    nImg = Math.floor(Math.random() * 9);
     while(img[nImg] == ""){
-        nImg = Math.floor(Math.random() * 18);
+        nImg = Math.floor(Math.random() * 9);
     }
     for(let j=0; j<2; j++){
-        nVerso = Math.floor(Math.random() * 36)
+        nVerso = Math.floor(Math.random() * 18)
         while(verso[nVerso].innerHTML !== ""){
-            nVerso = Math.floor(Math.random() * 36)
+            nVerso = Math.floor(Math.random() * 18)
         }
         verso[nVerso].innerHTML = img[nImg]
     }
