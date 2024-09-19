@@ -49,7 +49,7 @@ for(i=0; i<36; i++) { //laco da base das cartas
 let cartas = document.getElementsByClassName('carta');
 
 /*let verso = new Array(36)
-for(let i=0; i<4; i++) {
+for(let i=0; i<4; i++) {git 
     verso[i] = document.getElementById('verso' + i.toString);
 }*/
 
