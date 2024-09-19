@@ -58,7 +58,6 @@ for(let carta of cartas) {
     function giraCarta(){
         let audio = new Audio('audio/cartagiro.mp3')
         audio.play()
-        speechSynthesis.speak(enunciado)
         carta.style.transform = 'rotateY(180deg)'
         setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function corpo conciso
     }
