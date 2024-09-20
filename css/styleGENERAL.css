@@ -48,11 +48,12 @@ img{
 }
 p{
     text-align: center;
+    padding-top: auto;
 }
 #jogoMemoria{
     width: 1242px;
     height: 621px;
     margin-top: 61px;
     float: right;
-    margin-right: 20px;
+    margin-right: 10px;
 }
