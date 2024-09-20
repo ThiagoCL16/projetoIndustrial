@@ -1,6 +1,6 @@
 //Math.random() - gera um numero aleatorio
 //array
-let img = new Array(36)
+let img = new Array(15)
 img[0] = '<img src="img/animais_jogo/abelha.com.png" data-description="abelha">';
 img[1] = '<img src="img/animais_jogo/arara.com.png" data-description="arara">';
 img[2] = '<img src="img/animais_jogo/barata.com.png" data-description="barata">';
@@ -47,11 +47,11 @@ class verso{
     }
 }
 // Criando as cartas
-let container = new Array(36)
-let Carta = new Array(36)
-let frente = new Array(36)
-let Verso = new Array(36)
-for(i=0; i<36; i++) { //laco da base das cartas
+let container = new Array(18)
+let Carta = new Array(18)
+let frente = new Array(18)
+let Verso = new Array(18)
+for(i=0; i<18; i++) { //laco da base das cartas
     
     container[i] = document.createElement('div')  // "criar elemento"...
     container[i].className = 'container' // "Nome classe" - acessa o atributo class do elemento e modifica-o
@@ -96,15 +96,15 @@ function giraCartas(){
 }
     
 
-for(let i=0; i<18; i++){
-    nImg = Math.floor(Math.random() * 18);
+for(let i=0; i<9; i++){
+    nImg = Math.floor(Math.random() * 16);
     while(img[nImg] == ""){
-        nImg = Math.floor(Math.random() * 18);
+        nImg = Math.floor(Math.random() * 16);
     }
     for(let j=0; j<2; j++){
-        nVerso = Math.floor(Math.random() * 36)
+        nVerso = Math.floor(Math.random() * 18)
         while(Verso[nVerso].elemento.innerHTML !== ""){
-            nVerso = Math.floor(Math.random() * 36)
+            nVerso = Math.floor(Math.random() * 18)
         }
         Verso[nVerso].elemento.innerHTML = img[nImg]
     }
