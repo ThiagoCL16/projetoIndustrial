@@ -4,6 +4,7 @@ let img = new Array(36)
 img[0] = '<img src="img/gato.png">';
 img[1] = '<img src="img/cachorro.png">';
 
+
 let jogoMemoria = document.getElementById('jogoMemoria');
 
 class carta{
