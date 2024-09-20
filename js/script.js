@@ -65,8 +65,23 @@ for(let i=0; i<4; i++) {git
     verso[i] = document.getElementById('verso' + i.toString);
 }*/
 
-
+let qtdCartaVirada = 0
+let cartaVirada = ''
+let imgCartaVirada = ''
 for(let carta of cartas) {
+    // Função apenas para testes
+    function giraCartas(){
+        for(let carta of cartas){
+            carta.style.transform = 'rotateY(180deg)'
+            setTimeout(voltaCartas, 5 * 1000)
+        }
+    }
+    function voltaCartas(){
+        for(let carta of cartas){
+            carta.style.transform = 'rotateY(0)'  
+        }
+         
+    }
     function giraCarta(){
         let audio = new Audio('audio/cartagiro2.mp3')
         audio.play()
@@ -81,14 +96,6 @@ for(let carta of cartas) {
     }
     
     carta.onclick = giraCarta
-
-    // Função apenas para testes
-    function giraCartas(){
-        for(let carta of cartas){
-            carta.style.transform = 'rotateY(180deg)'
-            setTimeout(voltaCartas = () => carta.style.transform = 'rotateY(0)', 5000) 
-        }
-    }
 }
     
 
