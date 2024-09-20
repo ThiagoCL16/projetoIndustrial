@@ -1,8 +1,22 @@
 //Math.random() - gera um numero aleatorio
 //array
 let img = new Array(36)
-img[0] = '<img src="img/gato.png">';
-img[1] = '<img src="img/cachorro.png">';
+img[0] = '<img src="img/animais_jogo/abelha.com.png" data-description="abelha">';
+img[1] = '<img src="img/animais_jogo/arara.com.png" data-description="arara">';
+img[2] = '<img src="img/animais_jogo/barata.com.png" data-description="barata">';
+img[3] = '<img src="img/animais_jogo/canguru.com.png" data-description="canguru">';
+img[4] = '<img src="img/animais_jogo/caracol.com.png" data-description="caracol">';
+img[5] = '<img src="img/animais_jogo/coala.com.png" data-description="coala">';
+img[6] = '<img src="img/animais_jogo/coruja.com.png" data-description="coruja">';
+img[7] = '<img src="img/animais_jogo/dinossauro.com.png" data-description="dinossauro">';
+img[8] = '<img src="img/animais_jogo/foca.com.png" data-description="foca">';
+img[9] = '<img src="img/animais_jogo/formiga.com.png" data-description="formiga">';
+img[10] = '<img src="img/animais_jogo/lobo.com.png" data-description="lobo">';
+img[11] = '<img src="img/animais_jogo/peixe.com.png" data-description="peixe">';
+img[12] = '<img src="img/animais_jogo/pinguim.com.png" data-description="pinguim">';
+img[13] = '<img src="img/animais_jogo/polvo.com.png" data-description="polvo">';
+img[14] = '<img src="img/animais_jogo/tubarao.com.png" data-description="tubarao">';
+img[15] = '<img src="img/animais_jogo/veado.com.png" data-description="veado">';
 
 
 let jogoMemoria = document.getElementById('jogoMemoria');
