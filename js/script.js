@@ -1,8 +1,22 @@
 //Math.random() - gera um numero aleatorio
 //array
-let img = new Array(18)
-img[0] = '<img src="img/gato.png" data-description="gato">';
-img[1] = '<img src="img/cachorro.png" data-description="cachorro">';
+let img = new Array(16)
+img[0] = '<img src="img/animais_jogo/abelha.com.png" data-description="abelha">';
+img[1] = '<img src="img/animais_jogo/arara.com.png" data-description="arara">';
+img[2] = '<img src="img/animais_jogo/barata.com.png" data-description="barata">';
+img[3] = '<img src="img/animais_jogo/canguru.com.png" data-description="canguru">';
+img[4] = '<img src="img/animais_jogo/caracol.com.png" data-description="caracol">';
+img[5] = '<img src="img/animais_jogo/coala.com.png" data-description="coala">';
+img[6] = '<img src="img/animais_jogo/coruja.com.png" data-description="coruja">';
+img[7] = '<img src="img/animais_jogo/dinossauro.com.png" data-description="dinossauro">';
+img[8] = '<img src="img/animais_jogo/foca.com.png" data-description="foca">';
+img[9] = '<img src="img/animais_jogo/formiga.com.png" data-description="formiga">';
+img[10] = '<img src="img/animais_jogo/lobo.com.png" data-description="lobo">';
+img[11] = '<img src="img/animais_jogo/peixe.com.png" data-description="peixe">';
+img[12] = '<img src="img/animais_jogo/pinguim.com.png" data-description="pinguim">';
+img[13] = '<img src="img/animais_jogo/polvo.com.png" data-description="polvo">';
+img[14] = '<img src="img/animais_jogo/tubarao.com.png" data-description="tubarao">';
+img[15] = '<img src="img/animais_jogo/veado.com.png" data-description="veado">';
 
 let jogoMemoria = document.getElementById('jogoMemoria');
 
@@ -14,8 +28,6 @@ let verso = new Array(18)
 let p = new Array(18)
 let texto = new Array(18)
 for(i=0; i<18; i++) { //laco da base das cartas
-    
-    /*jogoMemoria.innerHTML += `<div class="container"><div class="carta"><div class="lado" id="frente${i}" tabindex="${i}"><p>carta ${i}</p></div><div class="lado" id="verso${i}"><img src="img/gato.png" title="gato" alt="gato"></div></div></div>`*/
     
     container[i] = document.createElement('div')  // "criar elemento"...
     container[i].className = 'container' // "Nome classe" - acessa o atributo class do elemento e modifica-o
@@ -81,9 +93,9 @@ for(let carta of cartas) {
     
 
 for(let i=0; i<9; i++){
-    nImg = Math.floor(Math.random() * 9);
+    nImg = Math.floor(Math.random() * 16);
     while(img[nImg] == ""){
-        nImg = Math.floor(Math.random() * 9);
+        nImg = Math.floor(Math.random() * 16);
     }
     for(let j=0; j<2; j++){
         nVerso = Math.floor(Math.random() * 18)
