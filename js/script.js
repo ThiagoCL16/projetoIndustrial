@@ -84,36 +84,37 @@ for(i=0; i<18; i++) { //laco da base das cartas
     texto[i] = ""
 }
 
+let cartaVirada
 let qtdCartaVirada = 0
 function giraCarta(indice){
-    let audio = new Audio('audio/cartagiro2.mp3')
-    audio.play()
-    Carta[indice].elemento.style.transform = 'rotateY(180deg)'
-    //setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function corpo conciso
-    setTimeout(verificaCartas = () => {
-        if(qtdCartaVirada == 0){
-            cartaVirada = Carta[indice]
-            imgCartaVirada = Verso[indice].img
-            qtdCartaVirada++
-        } else if(qtdCartaVirada == 1 && cartaVirada.indice != Verso[indice].indice) {
-            if(imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice){
-                cartaVirada.elemento.innerHTML = ""
-                Carta[indice].elemento.innerHTML = ""
-            } else if(imgCartaVirada != Verso[indice].img){
-                cartaVirada.elemento.style.transform = 'translateY(0)'
-                Carta[indice].elemento.style.transform = 'translateY(0)' 
+    if(Carta[indice].virada == false){
+        let audio = new Audio('audio/cartagiro2.mp3')
+        audio.play()
+        Carta[indice].elemento.style.transform = 'rotateY(180deg)'
+        Carta[indice].virada = true
+        //setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function corpo conciso
+        setTimeout(verificaCartas = () => {
+            if(qtdCartaVirada == 0){
+                cartaVirada = Carta[indice]
+                imgCartaVirada = Verso[indice].img
+                qtdCartaVirada++
+            } else if(qtdCartaVirada == 1 && cartaVirada.indice != Verso[indice].indice) {
+                if(imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice){
+                    cartaVirada.elemento.innerHTML = ""
+                    Carta[indice].elemento.innerHTML = ""
+                } else if(imgCartaVirada != Verso[indice].img){
+                    cartaVirada.elemento.style.transform = 'translateY(0)'
+                    cartaVirada.virada = false
+                    Carta[indice].elemento.style.transform = 'translateY(0)' 
+                    Carta[indice].virada = false
+                }
+                qtdCartaVirada = 0
             }
-            qtdCartaVirada = 0
-        }
-    }, 1000)
-    
+        }, 1.5 * 1000)
+    }
 }
 let cartas = document.getElementsByClassName('carta');
 
-/*let verso = new Array(36)
-for(let i=0; i<4; i++) {git 
-    verso[i] = document.getElementById('verso' + i.toString);
-}*/
 
 for(let carta of cartas) {
     // Função apenas para testes
