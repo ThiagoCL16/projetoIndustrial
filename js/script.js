@@ -65,9 +65,6 @@ for(let i=0; i<4; i++) {git
     verso[i] = document.getElementById('verso' + i.toString);
 }*/
 
-let qtdCartaVirada = 0
-let cartaVirada = ''
-let imgCartaVirada = ''
 for(let carta of cartas) {
     // Função apenas para testes
     function giraCartas(){
