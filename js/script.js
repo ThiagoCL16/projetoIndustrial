@@ -77,9 +77,27 @@ for(i=0; i<18; i++) { //laco da base das cartas
     Carta[i] = new carta(elementoCarta, i)
 }
 
+let qtdCartaVirada = 0
 function giraCarta(indice){
     Carta[indice].elemento.style.transform = 'rotateY(180deg)'
     //setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function corpo conciso
+    setTimeout(verificaCartas = () => {
+        if(qtdCartaVirada == 0){
+        cartaVirada = Carta[indice]
+        imgCartaVirada = Verso[indice].img
+        qtdCartaVirada++
+        } else if(qtdCartaVirada == 1 && imgCartaVirada != Verso[indice].img) {
+            if(imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice){
+                cartaVirada.elemento.innerHTML = ""
+                Carta[indice].elemento.innerHTML = ""
+            } else if(imgCartaVirada != Verso[indice].img){
+                cartaVirada.elemento.style.transform = 'translateY(0)'
+                Carta[indice].elemento.style.transform = 'translateY(0)' 
+            }
+            qtdCartaVirada = 0
+        }
+    }, 1000)
+    
 }
 let cartas = document.getElementsByClassName('carta');
 
@@ -107,6 +125,7 @@ for(let i=0; i<9; i++){
             nVerso = Math.floor(Math.random() * 18)
         }
         Verso[nVerso].elemento.innerHTML = img[nImg]
+        Verso[nVerso].img = img[nImg]
     }
     img[nImg] = ""
 }
