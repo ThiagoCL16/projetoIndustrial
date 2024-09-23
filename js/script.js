@@ -86,14 +86,16 @@ for(i=0; i<18; i++) { //laco da base das cartas
 
 let qtdCartaVirada = 0
 function giraCarta(indice){
+    let audio = new Audio('audio/cartagiro2.mp3')
+    audio.play()
     Carta[indice].elemento.style.transform = 'rotateY(180deg)'
     //setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function corpo conciso
     setTimeout(verificaCartas = () => {
         if(qtdCartaVirada == 0){
-        cartaVirada = Carta[indice]
-        imgCartaVirada = Verso[indice].img
-        qtdCartaVirada++
-        } else if(qtdCartaVirada == 1 && imgCartaVirada != Verso[indice].img) {
+            cartaVirada = Carta[indice]
+            imgCartaVirada = Verso[indice].img
+            qtdCartaVirada++
+        } else if(qtdCartaVirada == 1 && cartaVirada.indice != Verso[indice].indice) {
             if(imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice){
                 cartaVirada.elemento.innerHTML = ""
                 Carta[indice].elemento.innerHTML = ""
@@ -127,25 +129,10 @@ for(let carta of cartas) {
         }
          
     }
-    function giraCarta(){
-        let audio = new Audio('audio/cartagiro2.mp3')
-        audio.play()
-        carta.style.transform = 'rotateY(180deg)'
-        setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 17 * 1000) // voltaCarta: arrow function corpo conciso
-    }
-    carta.onkeypress = function(event) {
-        let key = event.key
-        if(key == 'Enter'){ // Código da tecla enter
-            giraCarta()
-        }
-    }
-    
-    carta.onclick = giraCarta
 }
     
 
-for(let i=0; i<9; i++){
-    nImg = Math.floor(Math.random() * 16);
+
 for(let i=0; i<9; i++){
     nImg = Math.floor(Math.random() * 16);
     while(img[nImg] == ""){
@@ -160,7 +147,7 @@ for(let i=0; i<9; i++){
         Verso[nVerso].img = img[nImg]
     }
     img[nImg] = ""
-}}
+}
 function lerDescricao(elemento) {
     speechSynthesis.cancel() //Remove todos os enunciados da fila de enunciados
     const descricao = elemento.dataset.description;//
