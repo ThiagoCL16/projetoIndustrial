@@ -20,11 +20,36 @@ img[15] = '<img src="img/animais_jogo/veado.com.png" data-description="veado">';
 
 let jogoMemoria = document.getElementById('jogoMemoria');
 
+class carta{
+    constructor(elemento, indice, Verso){
+        this.elemento = elemento
+        this.indice = indice
+        this.virada = false
+        this.elemento.onkeypress = function(evento){
+            let key = evento.key
+            if(key == 'Enter') {
+                giraCarta(indice)
+            }
+        }
+        this.elemento.onclick = function(){
+           giraCarta(indice) 
+        } 
+        this.Verso = Verso
+    }
+}
+
+class verso{
+    constructor(elemento, indice, img){
+        this.indice = indice
+        this.img = img
+        this.elemento = elemento
+    }
+}
 // Criando as cartas
 let container = new Array(18)
-let carta = new Array(18)
+let Carta = new Array(18)
 let frente = new Array(18)
-let verso = new Array(18)
+let Verso = new Array(18)
 let p = new Array(18)
 let texto = new Array(18)
 for(i=0; i<18; i++) { //laco da base das cartas
@@ -34,11 +59,10 @@ for(i=0; i<18; i++) { //laco da base das cartas
     
     jogoMemoria.appendChild(container[i]) // "Acrescentar filho" - este método adiciona o elemento entre parênteses dentro do elemento pai 
 
-    carta[i] = document.createElement('div')
-    carta[i].className = 'carta' //nomeda classe no elemento
-    carta[i].setAttribute('tabindex', i+1) //cria atributo 
-    carta[i].setAttribute('onkeypress', 'giraCarta()')// com o atributo criado, a outra virgula e um valor dele
-    container[i].appendChild(carta[i])
+    elementoCarta = document.createElement('div')
+    elementoCarta.className = 'carta' //nome da classe no elemento
+    elementoCarta.setAttribute('tabindex', i+1) //cria atributo 
+    container[i].appendChild(elementoCarta)
 
     frente[i] = document.createElement('div')
     frente[i].className = 'lado'
@@ -49,15 +73,39 @@ for(i=0; i<18; i++) { //laco da base das cartas
     frente[i].setAttribute('data-description', texto)
     p[i].innerHTML = texto[i]
     
-    carta[i].appendChild(frente[i])
+    elementoCarta.appendChild(frente[i])
 
-    verso[i] = document.createElement('div')
-    verso[i].className = 'lado'
-    verso[i].id = `verso${i}`
-    carta[i].appendChild(verso[i])
+    elementoVerso = document.createElement('div')
+    elementoVerso.className = 'lado'
+    elementoVerso.id = `verso${i}`
+    elementoCarta.appendChild(elementoVerso)
+    Verso[i] = new verso(elementoVerso, i, img[i])
+    Carta[i] = new carta(elementoCarta, i)
     texto[i] = ""
-    }
+}
 
+let qtdCartaVirada = 0
+function giraCarta(indice){
+    Carta[indice].elemento.style.transform = 'rotateY(180deg)'
+    //setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function corpo conciso
+    setTimeout(verificaCartas = () => {
+        if(qtdCartaVirada == 0){
+        cartaVirada = Carta[indice]
+        imgCartaVirada = Verso[indice].img
+        qtdCartaVirada++
+        } else if(qtdCartaVirada == 1 && imgCartaVirada != Verso[indice].img) {
+            if(imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice){
+                cartaVirada.elemento.innerHTML = ""
+                Carta[indice].elemento.innerHTML = ""
+            } else if(imgCartaVirada != Verso[indice].img){
+                cartaVirada.elemento.style.transform = 'translateY(0)'
+                Carta[indice].elemento.style.transform = 'translateY(0)' 
+            }
+            qtdCartaVirada = 0
+        }
+    }, 1000)
+    
+}
 let cartas = document.getElementsByClassName('carta');
 
 /*let verso = new Array(36)
@@ -98,18 +146,21 @@ for(let carta of cartas) {
 
 for(let i=0; i<9; i++){
     nImg = Math.floor(Math.random() * 16);
+for(let i=0; i<9; i++){
+    nImg = Math.floor(Math.random() * 16);
     while(img[nImg] == ""){
         nImg = Math.floor(Math.random() * 16);
     }
     for(let j=0; j<2; j++){
         nVerso = Math.floor(Math.random() * 18)
-        while(verso[nVerso].innerHTML !== ""){
+        while(Verso[nVerso].elemento.innerHTML !== ""){
             nVerso = Math.floor(Math.random() * 18)
         }
-        verso[nVerso].innerHTML = img[nImg]
+        Verso[nVerso].elemento.innerHTML = img[nImg]
+        Verso[nVerso].img = img[nImg]
     }
     img[nImg] = ""
-}
+}}
 function lerDescricao(elemento) {
     speechSynthesis.cancel() //Remove todos os enunciados da fila de enunciados
     const descricao = elemento.dataset.description;//
@@ -124,4 +175,4 @@ function lerDescricao(elemento) {
       lerDescricao(elemento);
     }
     
-});
+})
