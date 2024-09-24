@@ -128,3 +128,8 @@ function lerDescricao(elemento) {
     }
     
 });
+document.getElementById("btregras").addEventListener("click",function(){
+    Swal.fire('O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência o visual, visando a prenção contra o capacitismo. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela')
+    //let mensagem = document.querySelector(".msgregras");
+   // mensagem.classList.toggle("mostrar")
+})
