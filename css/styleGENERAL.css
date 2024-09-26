@@ -68,3 +68,20 @@ p{
 .mostrar{
     display: block;
 }
+.titulo{/*das regras*/
+    text-align: center;
+}
+.texto{/*das regras*/
+    text-align: justify;
+    display: block;
+}
+/*.btsairregras{
+    color:rgb(249, 85, 112);
+    background-color: #fff;
+}*/
+#btregras{
+    color:rgb(249, 85, 112);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 30px;
+}

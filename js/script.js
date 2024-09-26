@@ -20,6 +20,14 @@ img[15] = '<img src="img/animais_jogo/veado.com.png" data-description="veado">';
 
 let jogoMemoria = document.getElementById('jogoMemoria');
 
+let Pontuacao = new Object()
+Pontuacao.pontos = 0
+Pontuacao.elemento = document.getElementById('pontuacao')
+Pontuacao.acerto = 10
+Pontuacao.dica = 5
+
+
+Pontuacao.elemento.innerHTML = `Pontuação: ${Pontuacao.pontos}`
 class carta{
     constructor(elemento, indice, Verso){
         this.elemento = elemento
@@ -100,6 +108,8 @@ function giraCarta(indice){
                 qtdCartaVirada++
             } else if(qtdCartaVirada == 1 && cartaVirada.indice != Verso[indice].indice) {
                 if(imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice){
+                    Pontuacao.pontos += Pontuacao.acerto
+                    Pontuacao.elemento.innerHTML = `Pontuação: ${Pontuacao.pontos}`
                     cartaVirada.elemento.innerHTML = ""
                     Carta[indice].elemento.innerHTML = ""
                 } else if(imgCartaVirada != Verso[indice].img){
@@ -165,7 +175,41 @@ function lerDescricao(elemento) {
     
 });
 document.getElementById("btregras").addEventListener("click",function(){
-    Swal.fire('O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência o visual, visando a prenção contra o capacitismo. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela')
+    Swal.fire({
+        title:'Regras do Jogo',
+        html:
+        //A div serve para justificar o texto corretamente 
+        '<div class="texto"> O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência o visual, visando a prenção contra o capacitismo. <br>'
+        +'Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. <br>'
+        + 'Há a opção de reiniciar o jogo ao final e durante a partida. <br> Terá um cronômetro com o tempo rolando na tela </div>',
+        confirmButtonText: 'sair',
+        background: '#000',
+        color: '#fff',
+        customClass: {
+            title: 'titulo',
+            content: 'texto',
+            confirmButtonText: 'btsairregras',
+        }
+    })
     //let mensagem = document.querySelector(".msgregras");
    // mensagem.classList.toggle("mostrar")
 })
+
+
+dica = document.getElementById("dica")
+dica.onclick = function(){
+    let audio = new Audio('audio/cartagiro2.mp3')
+    audio.play()
+    let sorteio = Math.floor(Math.random()*18)
+    while(Carta[sorteio].virada == true){
+        sorteio = Math.floor(Math.random()*18)
+    }
+    Carta[sorteio].elemento.style.transform = 'rotateY(180deg)'
+    Carta[sorteio].virada = true
+    Pontuacao.pontos -= Pontuacao.dica
+    Pontuacao.elemento.innerHTML = `Pontuação: ${Pontuacao.pontos}`
+    setTimeout(function(){
+        Carta[sorteio].elemento.style.transform = 'rotateY(0)'
+        Carta[sorteio].virada = false
+    }, 1000)
+}
