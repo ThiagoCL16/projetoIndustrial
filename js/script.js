@@ -1,5 +1,6 @@
 //Math.random() - gera um numero aleatorio
 //array
+
 let img = new Array(16)
 img[0] = '<img src="img/animais_jogo/abelha.com.png" data-description="abelha">';
 img[1] = '<img src="img/animais_jogo/arara.com.png" data-description="arara">';
@@ -26,6 +27,34 @@ Pontuacao.elemento = document.getElementById('pontuacao')
 Pontuacao.acerto = 10
 Pontuacao.dica = 5
 
+let Timer = new Object()
+Timer.elemento = document.getElementById('timer')
+Timer.minutos = 0
+Timer.segundos = 0
+Timer.ativo = false
+
+Timer.atualizaTimer = function(){
+    if(Timer.ativo == true){
+        Timer.segundos++
+        if(Timer.segundos % 60 == 0){
+            Timer.segundos = 0
+            Timer.minutos++
+        }
+        if(Timer.segundos < 10){
+            Timer.segundos = '0' + parseInt(Timer.segundos)
+        }
+        if(Timer.minutos < 10){
+            Timer.minutos = '0' + parseInt(Timer.minutos)
+        }
+        Timer.elemento.innerHTML = Timer.minutos + ':' + Timer.segundos
+        if(Timer.ativo == true){
+            setTimeout(Timer.atualizaTimer, 1000)
+        }
+    }
+}
+function fimJogo(){
+    Timer.ativo = false
+}
 
 Pontuacao.elemento.innerHTML = `Pontuação: ${Pontuacao.pontos}`
 class carta{
@@ -71,7 +100,6 @@ for(i=0; i<18; i++) { //laco da base das cartas
     elementoCarta.className = 'carta' //nome da classe no elemento
     elementoCarta.setAttribute('tabindex', i+1) //cria atributo 
     container[i].appendChild(elementoCarta)
-
     frente[i] = document.createElement('div')
     frente[i].className = 'lado'
     frente[i].id = `frente${i}`
@@ -91,11 +119,22 @@ for(i=0; i<18; i++) { //laco da base das cartas
     Carta[i] = new carta(elementoCarta, i)
     texto[i] = ""
 }
+let totalCartas = 18
 
 let cartaVirada
 let qtdCartaVirada = 0
 function giraCarta(indice){
     if(Carta[indice].virada == false){
+        if(Timer.ativo == false){
+            Timer.ativo = true
+            Timer.atualizaTimer()
+        }
+        //alert(Carta[indice].elemento.children[0])
+        lerDescricao(Carta[indice].elemento.children[0])
+        setTimeout(() => {
+            lerDescricao(Verso[indice].elemento.children[0])
+        }, 1500)
+        
         let audio = new Audio('audio/cartagiro2.mp3')
         audio.play()
         Carta[indice].elemento.style.transform = 'rotateY(180deg)'
@@ -110,8 +149,12 @@ function giraCarta(indice){
                 if(imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice){
                     Pontuacao.pontos += Pontuacao.acerto
                     Pontuacao.elemento.innerHTML = `Pontuação: ${Pontuacao.pontos}`
-                    cartaVirada.elemento.innerHTML = ""
-                    Carta[indice].elemento.innerHTML = ""
+                    cartaVirada.elemento.parentNode.innerHTML = ""
+                    Carta[indice].elemento.parentNode.innerHTML = ""
+                    totalCartas -= 2
+                    if(totalCartas == 0){
+                        fimJogo()
+                    }
                 } else if(imgCartaVirada != Verso[indice].img){
                     cartaVirada.elemento.style.transform = 'translateY(0)'
                     cartaVirada.virada = false
@@ -141,7 +184,7 @@ for(let carta of cartas) {
          
     }
 }
-    
+
 
 
 for(let i=0; i<9; i++){
@@ -156,6 +199,7 @@ for(let i=0; i<9; i++){
         }
         Verso[nVerso].elemento.innerHTML = img[nImg]
         Verso[nVerso].img = img[nImg]
+        Verso[nVerso].indiceImg = nImg
     }
     img[nImg] = ""
 }
@@ -211,5 +255,5 @@ dica.onclick = function(){
     setTimeout(function(){
         Carta[sorteio].elemento.style.transform = 'rotateY(0)'
         Carta[sorteio].virada = false
-    }, 1000)
+    }, 2 * 1000)
 }
