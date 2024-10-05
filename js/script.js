@@ -1,22 +1,51 @@
 //Math.random() - gera um numero aleatorio
-//array
+//arraylet img = new Array()
+const tema = document.getElementById('tema');
+const botao = document.getElementById('btmudartema');
 let img = new Array(16)
-img[0] = '<img src="img/animais_jogo/abelha.com.png" data-description="abelha">';
-img[1] = '<img src="img/animais_jogo/arara.com.png" data-description="arara">';
-img[2] = '<img src="img/animais_jogo/barata.com.png" data-description="barata">';
-img[3] = '<img src="img/animais_jogo/canguru.com.png" data-description="canguru">';
-img[4] = '<img src="img/animais_jogo/caracol.com.png" data-description="caracol">';
-img[5] = '<img src="img/animais_jogo/coala.com.png" data-description="coala">';
-img[6] = '<img src="img/animais_jogo/coruja.com.png" data-description="coruja">';
-img[7] = '<img src="img/animais_jogo/dinossauro.com.png" data-description="dinossauro">';
-img[8] = '<img src="img/animais_jogo/foca.com.png" data-description="foca">';
-img[9] = '<img src="img/animais_jogo/formiga.com.png" data-description="formiga">';
-img[10] = '<img src="img/animais_jogo/lobo.com.png" data-description="lobo">';
-img[11] = '<img src="img/animais_jogo/peixe.com.png" data-description="peixe">';
-img[12] = '<img src="img/animais_jogo/pinguim.com.png" data-description="pinguim">';
-img[13] = '<img src="img/animais_jogo/polvo.com.png" data-description="polvo">';
-img[14] = '<img src="img/animais_jogo/tubarao.com.png" data-description="tubarao">';
-img[15] = '<img src="img/animais_jogo/veado.com.png" data-description="veado">';
+let temas = {
+    animal: [
+        img[0] = '<img src="img/animais_jogo/abelha.com.png" data-description="abelha">',
+        img[1] ='<img src="img/animais_jogo/arara.com.png" data-description="arara">',
+        img[2] = '<img src="img/animais_jogo/barata.com.png" data-description="barata">',
+        img[3] = '<img src="img/animais_jogo/canguru.com.png" data-description="canguru">',
+        img[4] = '<img src="img/animais_jogo/caracol.com.png" data-description="caracol">',
+        img[5] = '<img src="img/animais_jogo/coala.com.png" data-description="coala">',
+        img[6] = '<img src="img/animais_jogo/coruja.com.png" data-description="coruja">',
+        img[7] = '<img src="img/animais_jogo/dinossauro.com.png" data-description="dinossauro">',
+        img[8] = '<img src="img/animais_jogo/foca.com.png" data-description="foca">',
+        img[9] = '<img src="img/animais_jogo/formiga.com.png" data-description="formiga">',
+        img[10] = '<img src="img/animais_jogo/lobo.com.png" data-description="lobo">',
+        img[11] = '<img src="img/animais_jogo/peixe.com.png" data-description="peixe">',
+        img[12] = '<img src="img/animais_jogo/pinguim.com.png" data-description="pinguim">',
+        img[13] = '<img src="img/animais_jogo/polvo.com.png" data-description="polvo">',
+        img[14] = '<img src="img/animais_jogo/tubarao.com.png" data-description="tubarao">',
+        img[15] = '<img src="img/animais_jogo/veado.com.png" data-description="veado">',
+    ],
+    fruta: [
+        img[0] = '<img src="img/frutas_jogo/banana.jpg" data-description="banana">',
+        img[1] = '<img src="img/frutas_jogo/abacate.jpg" data-description="abacate">',
+        img[2] = '<img src="img/frutas_jogo/laranja.jpg" data-description="laranja">',
+        img[3] = '<img src="img/frutas_jogo/limao.jpg" data-description="limao">',
+        img[4] = '<img src="img/frutas_jogo/melancia.jpg" data-description="melancia">',
+        img[5] = '<img src="img/frutas_jogo/mirtilo.jpg" data-description="mirtilo">',
+        img[6] = '<img src="img/frutas_jogo/morango.jpg" data-description="morango">',
+        img[7] = '<img src="img/frutas_jogo/pessego.jpg" data-description="pessego">',
+        img[8] = '<img src="img/frutas_jogo/uva.jpg" data-description="uva">',
+    ]
+};
+
+// Defina o array img
+
+
+// Preencha o array img com as imagens do tema selecionado
+
+
+// Inicializa as imagens quando a página carrega
+
+
+
+
 
 let jogoMemoria = document.getElementById('jogoMemoria');
 
@@ -92,6 +121,83 @@ for(i=0; i<18; i++) { //laco da base das cartas
     texto[i] = ""
 }
 
+function colocaImgsCartas(){
+    for(let i=0; i<9; i++){
+        if(img.length>9){
+            nImg = Math.floor(Math.random() * 16);
+            while(img[nImg] == ""){
+                nImg = Math.floor(Math.random() * 16);
+            }
+        } else {
+            nImg = Math.floor(Math.random() * 9);
+            while(img[nImg] == ""){
+                nImg = Math.floor(Math.random() * 9);
+            }
+        }
+        
+        for(let j=0; j<2; j++){
+            nVerso = Math.floor(Math.random() * 18)
+            while(Verso[nVerso].elemento.innerHTML !== ""){
+                nVerso = Math.floor(Math.random() * 18)
+            }
+            Verso[nVerso].elemento.innerHTML = img[nImg]
+            Verso[nVerso].img = img[nImg]
+        }
+        img[nImg] = ""
+    }
+}
+
+function atualizarImagens() {
+    const temaSelecionado = tema.value;
+    img.length = 0; // Limpa o array img
+   
+
+    img.push(...temas[temaSelecionado]); // Adiciona as imagens do tema selecionado
+    for(i=0; i<18; i++){
+        container[i].innerHTML = ""
+        elementoCarta = document.createElement('div')
+        elementoCarta.className = 'carta' //nome da classe no elemento
+        elementoCarta.setAttribute('tabindex', i+1) //cria atributo 
+        container[i].appendChild(elementoCarta)
+
+        frente[i] = document.createElement('div')
+        frente[i].className = 'lado'
+        frente[i].id = `frente${i}`
+        p[i] = document.createElement('p')
+        texto[i] = `Carta ${i+1}`
+        frente[i].appendChild(p[i])
+        frente[i].setAttribute('data-description', texto)
+        p[i].innerHTML = texto[i]
+        
+        elementoCarta.appendChild(frente[i])
+
+        elementoVerso = document.createElement('div')
+        elementoVerso.className = 'lado'
+        elementoVerso.id = `verso${i}`
+        elementoCarta.appendChild(elementoVerso)
+        Verso[i] = ''
+        Carta[i] = ''
+        Verso[i] = new verso(elementoVerso, i, img[i])
+        Carta[i] = new carta(elementoCarta, i)
+        texto[i] = ""
+        Carta[i].virada = false
+    }
+    
+    colocaImgsCartas()
+}
+atualizarImagens()
+// Atualiza as imagens ao mudar de tema
+tema.addEventListener('change', f = () =>{
+    atualizarImagens()
+    const elementosComDescricao = document.querySelectorAll('[data-description]');
+
+    elementosComDescricao.forEach(elemento => {
+        elemento.onmouseover =  function(){
+            lerDescricao(elemento);
+        }
+    });
+});
+
 let cartaVirada
 let qtdCartaVirada = 0
 function giraCarta(indice){
@@ -142,37 +248,19 @@ for(let carta of cartas) {
     }
 }
     
-
-
-for(let i=0; i<9; i++){
-    nImg = Math.floor(Math.random() * 16);
-    while(img[nImg] == ""){
-        nImg = Math.floor(Math.random() * 16);
-    }
-    for(let j=0; j<2; j++){
-        nVerso = Math.floor(Math.random() * 18)
-        while(Verso[nVerso].elemento.innerHTML !== ""){
-            nVerso = Math.floor(Math.random() * 18)
-        }
-        Verso[nVerso].elemento.innerHTML = img[nImg]
-        Verso[nVerso].img = img[nImg]
-    }
-    img[nImg] = ""
-}
 function lerDescricao(elemento) {
     speechSynthesis.cancel() //Remove todos os enunciados da fila de enunciados
     const descricao = elemento.dataset.description;//
     const enunciado = new SpeechSynthesisUtterance(descricao);
     speechSynthesis.speak(enunciado);
-  }
+}
 
-  const elementosComDescricao = document.querySelectorAll('[data-description]');
+const elementosComDescricao = document.querySelectorAll('[data-description]');
 
-  elementosComDescricao.forEach(elemento => {
+elementosComDescricao.forEach(elemento => {
     elemento.onmouseover =  function(){
       lerDescricao(elemento);
     }
-    
 });
 document.getElementById("btregras").addEventListener("click",function(){
     Swal.fire({
@@ -194,7 +282,6 @@ document.getElementById("btregras").addEventListener("click",function(){
     //let mensagem = document.querySelector(".msgregras");
    // mensagem.classList.toggle("mostrar")
 })
-
 
 dica = document.getElementById("dica")
 dica.onclick = function(){
