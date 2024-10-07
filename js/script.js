@@ -1,6 +1,5 @@
 //Math.random() - gera um numero aleatorio
 //array
-let img = new Array()
 const tema = document.getElementById('tema');
 const botao = document.getElementById('btmudartema');
 let img = new Array(16)
