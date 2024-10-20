@@ -1,0 +1,4 @@
+          Verso[indice].elemento.children[0].removeEventListener('mouseover', chamaFuncLerDesc)
+        setTimeout(() => )
+    
+    

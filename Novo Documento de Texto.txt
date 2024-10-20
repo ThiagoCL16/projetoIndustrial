@@ -335,8 +335,8 @@ for(let carta of cartas) {
 funcao_ler_desc_elementos
 function lerDescricaoElemento(elemento) {
     speechSynthesis.cancel()
-    const utterance = new SpeechSynthesisUtterance(elemento.dataset.description);
-    speechSynthesis.speak(utterance);
+    const enunciado = new SpeechSynthesisUtterance(elemento.dataset.description);
+    speechSynthesis.speak(enunciado);
 }
 
 const elementosComDescricao = document.querySelectorAll('[data-description]');
