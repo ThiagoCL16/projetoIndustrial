@@ -90,9 +90,9 @@ class carta{
         this.elemento = elemento
         this.indice = indice
         this.virada = false
-        this.elemento.onkeypress = function(evento){
-            let key = evento.key
-            if(key == 'Enter') {
+        this.elemento.onkeydown = function(evento){
+            let tecla = evento.key
+            if(tecla == 'Enter') {
                 giraCarta(indice)
             }
         }
@@ -100,6 +100,15 @@ class carta{
            giraCarta(indice) 
         } 
         this.Verso = Verso
+    }
+}
+document.body.onkeyup = function(evento){
+    let tecla = evento.key
+    if(tecla == 'Tab'){
+        let elemento = document.activeElement.className == 'container'? document.activeElement.firstChild:document.activeElement
+        elemento = document.activeElement.className == 'carta'? document.activeElement.firstChild:elemento
+        //alert(document.activeElement.firstChild)
+        lerDescricao(elemento)
     }
 }
 
