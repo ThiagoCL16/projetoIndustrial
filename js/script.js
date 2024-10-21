@@ -1,3 +1,4 @@
+
 //Math.random() - gera um numero aleatorio
 //array
 const tema = document.getElementById('tema');
@@ -304,14 +305,13 @@ elementosComDescricao.forEach(elemento => {
       lerDescricao(elemento);
     }
 });
-document.getElementById("btregras").addEventListener("click",function(){
+document.getElementById("btregras").addEventListener("click", function() {
+    const regrasDescricao = "O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência o visual, visando a prenção contra o capacitismo. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela";
+
     Swal.fire({
-        title:'Regras do Jogo',
+        title: 'Regras do Jogo',
         html:
-        //A div serve para justificar o texto corretamente 
-        '<div class="texto"> O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência o visual, visando a prenção contra o capacitismo. <br>'
-        +'Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. <br>'
-        + 'Há a opção de reiniciar o jogo ao final e durante a partida. <br> Terá um cronômetro com o tempo rolando na tela </div>',
+        '<div class="texto" data-description="' + regrasDescricao + '">O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência o visual, visando a prenção contra o capacitismo. <br>Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. <br>Há a opção de reiniciar o jogo ao final e durante a partida. <br> Terá um cronômetro com o tempo rolando na tela </div>',
         confirmButtonText: 'sair',
         background: '#000',
         color: '#fff',
@@ -320,10 +320,12 @@ document.getElementById("btregras").addEventListener("click",function(){
             content: 'texto',
             confirmButtonText: 'btsairregras',
         }
-    })
-    //let mensagem = document.querySelector(".msgregras");
-   // mensagem.classList.toggle("mostrar")
-})
+    });
+
+    // Lê a descrição das regras
+    lerDescricao({ dataset: { description: regrasDescricao } });
+});
+
 
 dica = document.getElementById("dica")
 dica.onclick = function(){
