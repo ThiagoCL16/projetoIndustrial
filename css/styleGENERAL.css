@@ -1,5 +1,6 @@
 body{
-    background-color: rgb(245, 221, 115);
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(221, 115, 245);
 }
 .container{
     perspective: 600px;
