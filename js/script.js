@@ -85,7 +85,7 @@ function fimJogo(){
     Timer.ativo = false
 }
 
-Pontuacao.elemento.innerHTML = `Pontuação: ${Pontuacao.pontos}`
+Pontuacao.elemento.innerHTML = `PONTUAÇÃO: ${Pontuacao.pontos}`
 class carta{
     constructor(elemento, indice, Verso){
         this.elemento = elemento
@@ -291,12 +291,11 @@ for(let carta of cartas) {
     }
 }
     
-function lerDescricao(elemento) {
-    speechSynthesis.cancel() //Remove todos os enunciados da fila de enunciados
-    const descricao = elemento.dataset.description;//
-    const enunciado = new SpeechSynthesisUtterance(descricao);
-    speechSynthesis.speak(enunciado);
+function lerDescricao(descricao) {
+    const utterance = new SpeechSynthesisUtterance(descricao.dataset.description);
+    speechSynthesis.speak(utterance);
 }
+
 
 const elementosComDescricao = document.querySelectorAll('[data-description]');
 
@@ -306,19 +305,20 @@ elementosComDescricao.forEach(elemento => {
     }
 });
 document.getElementById("btregras").addEventListener("click", function() {
-    const regrasDescricao = "O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência o visual, visando a prenção contra o capacitismo. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela";
+    const regrasDescricao = "O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência o visual. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela";
 
     Swal.fire({
         title: 'Regras do Jogo',
         html:
-        '<div class="texto" data-description="' + regrasDescricao + '">O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência o visual, visando a prenção contra o capacitismo. <br>Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. <br>Há a opção de reiniciar o jogo ao final e durante a partida. <br> Terá um cronômetro com o tempo rolando na tela </div>',
-        confirmButtonText: 'sair',
+        '<div class="texto" data-description="' + regrasDescricao + '">O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência o visual. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. <br>Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela </div>',
+        confirmButtonText: 'sair', 
         background: '#000',
         color: '#fff',
         customClass: {
             title: 'titulo',
             content: 'texto',
             confirmButtonText: 'btsairregras',
+            popup: 'modal-custom'
         }
     });
 
@@ -337,6 +337,25 @@ dica.onclick = function(){
     }
     Carta[sorteio].elemento.style.transform = 'rotateY(180deg)'
     Carta[sorteio].virada = true
+    if (Verso[sorteio] && Verso[sorteio].elemento) {
+        const verso = Verso[sorteio].elemento.dataset.description; // Verifica se existe
+        const numeroCarta = sorteio + 1; // Para exibir a carta começando de 1
+        const descricaoCompleta = `Carta ${numeroCarta}: ${verso}`; // Descrição completa
+    
+        // Adiciona log para verificar a descrição
+        console.log(descricaoCompleta);
+    
+        // Chama a função para falar a descrição
+        lerDescricao({ dataset: { description: descricaoCompleta } });
+    } else {
+        console.error("Verso ou elemento não encontrado para a carta sorteada.");
+    }
+    
+    function lerDescricao(descricao) {
+        const utterance = new SpeechSynthesisUtterance(descricao.dataset.description);
+        console.log("Fazendo a leitura: ", descricao.dataset.description); // Log de teste
+        speechSynthesis.speak(utterance);
+    }
     Pontuacao.pontos -= Pontuacao.dica
     Pontuacao.elemento.innerHTML = `Pontuação: ${Pontuacao.pontos}`
     setTimeout(function(){
