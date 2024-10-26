@@ -109,7 +109,7 @@ document.body.onkeyup = function(evento){
         let elemento = document.activeElement.className == 'container'? document.activeElement.firstChild:document.activeElement
         elemento = document.activeElement.className == 'carta'? document.activeElement.firstChild:elemento
         //alert(document.activeElement.firstChild)
-        lerDescricao(elemento)
+        lerDescricaoElemento(elemento)
     }
 }
 
@@ -230,7 +230,7 @@ tema.addEventListener('change', f = () =>{
 
     elementosComDescricao.forEach(elemento => {
         elemento.onmouseover =  function(){
-            lerDescricao(elemento);
+            lerDescricaoElemento(elemento);
         }
     });
 });
@@ -244,10 +244,9 @@ function giraCarta(indice){
             Timer.ativo = true
             Timer.atualizaTimer()
         }
-        //alert(Carta[indice].elemento.children[0])
-        lerDescricao(Carta[indice].elemento.children[0])
+        lerDescricaoElemento(Carta[indice].elemento.children[0])
         setTimeout(() => {
-            lerDescricao(Verso[indice].elemento.children[0])
+            lerDescricaoElemento(Verso[indice].elemento.children[0])
         }, 1500)
         
         let audio = new Audio('audio/cartagiro2.mp3')
@@ -263,7 +262,7 @@ function giraCarta(indice){
             } else if(qtdCartaVirada == 1 && cartaVirada.indice != Verso[indice].indice) {
                 if(imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice){
                     Pontuacao.pontos += Pontuacao.acerto
-                    Pontuacao.elemento.innerHTML = `Pontuação: ${Pontuacao.pontos}`
+                    Pontuacao.elemento.innerHTML = `PONTUAÇÃO: ${Pontuacao.pontos}`
                     cartaVirada.elemento.parentNode.innerHTML = ""
                     Carta[indice].elemento.parentNode.innerHTML = ""
                     totalCartas -= 2
@@ -300,8 +299,9 @@ for(let carta of cartas) {
     }
 }
     
-function lerDescricao(descricao) {
-    const utterance = new SpeechSynthesisUtterance(descricao.dataset.description);
+function lerDescricaoElemento(elemento) {
+    speechSynthesis.cancel()
+    const utterance = new SpeechSynthesisUtterance(elemento.dataset.description);
     speechSynthesis.speak(utterance);
 }
 
@@ -310,16 +310,16 @@ const elementosComDescricao = document.querySelectorAll('[data-description]');
 
 elementosComDescricao.forEach(elemento => {
     elemento.onmouseover =  function(){
-      lerDescricao(elemento);
+      lerDescricaoElemento(elemento);
     }
 });
 document.getElementById("btregras").addEventListener("click", function() {
-    const regrasDescricao = "O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência o visual. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela";
+    const regrasDescricao = "O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência visual. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela";
 
     Swal.fire({
         title: 'Regras do Jogo',
         html:
-        '<div class="texto" data-description="' + regrasDescricao + '">O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência o visual. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. <br>Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela </div>',
+        '<div id="textoRegras" data-description="' + regrasDescricao + '">O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência visual. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. <br>Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela </div>',
         confirmButtonText: 'sair', 
         background: '#000',
         color: '#fff',
@@ -332,7 +332,13 @@ document.getElementById("btregras").addEventListener("click", function() {
     });
 
     // Lê a descrição das regras
-    lerDescricao({ dataset: { description: regrasDescricao } });
+    lerDescricaoElemento({dataset: { description: regrasDescricao}});
+
+    let btsairregras = document.getElementsByClassName('swal2-styled')
+
+    btsairregras[0].setAttribute('data-description', 'sair')
+    console.log(btsairregras[0].dataset.description)
+    btsairregras[0].onmouseover = () => lerDescricaoElemento(btsairregras[0])
 });
 
 
@@ -347,7 +353,7 @@ dica.onclick = function(){
     Carta[sorteio].elemento.style.transform = 'rotateY(180deg)'
     Carta[sorteio].virada = true
     if (Verso[sorteio] && Verso[sorteio].elemento) {
-        const verso = Verso[sorteio].elemento.dataset.description; // Verifica se existe
+        const verso = Verso[sorteio].elemento.firstChild.dataset.description; // Verifica se existe
         const numeroCarta = sorteio + 1; // Para exibir a carta começando de 1
         const descricaoCompleta = `Carta ${numeroCarta}: ${verso}`; // Descrição completa
     
@@ -366,7 +372,7 @@ dica.onclick = function(){
         speechSynthesis.speak(utterance);
     }
     Pontuacao.pontos -= Pontuacao.dica
-    Pontuacao.elemento.innerHTML = `Pontuação: ${Pontuacao.pontos}`
+    Pontuacao.elemento.innerHTML = `PONTUAÇÃO: ${Pontuacao.pontos}`
     setTimeout(function(){
         Carta[sorteio].elemento.style.transform = 'rotateY(0)'
         Carta[sorteio].virada = false
