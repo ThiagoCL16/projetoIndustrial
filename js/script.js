@@ -132,11 +132,8 @@ for(i=0; i<18; i++) { //laco da base das cartas
     frente[i] = document.createElement('div')
     frente[i].className = 'lado'
     frente[i].id = `frente${i}`
-    p[i] = document.createElement('p')
     texto[i] = `Carta ${i+1}`
-    frente[i].appendChild(p[i])
     frente[i].setAttribute('data-description', texto)
-    p[i].innerHTML = texto[i]
     
     elementoCarta.appendChild(frente[i])
 
@@ -191,11 +188,8 @@ function atualizarImagens() {
         frente[i] = document.createElement('div')
         frente[i].className = 'lado'
         frente[i].id = `frente${i}`
-        p[i] = document.createElement('p')
         texto[i] = `Carta ${i+1}`
-        frente[i].appendChild(p[i])
         frente[i].setAttribute('data-description', texto)
-        p[i].innerHTML = texto[i]
         
         elementoCarta.appendChild(frente[i])
 

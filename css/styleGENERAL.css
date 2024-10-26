@@ -1,14 +1,15 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(223, 56, 120);
+    background-color: rgb(248, 222, 106);
 }
 .container{
     perspective: 600px;
     width: 190px;
     height: 190px;
     float: left;
-    margin: 0 15px 15px 0
+    margin: 0 15px 15px 0;    
 }
+
 .carta{
     transform-style: preserve-3d; /*Para os lados aparecerem em 3D*/
     transition: transform 0.8s; /*Para a virada da carta ter uma transição*/
@@ -16,8 +17,9 @@ body{
     width: 100%;
     height: 100%;
     float:left;
-    
 }
+
+
 .lado{
     backface-visibility: hidden; /* Para o lado de trás não aparecer*/
     position:absolute;
@@ -29,17 +31,23 @@ body{
     border: 1px solid rgb(40, 38, 35);
     position:absolute;
     border-radius: 5%;
-    box-shadow: 5px 5px 0 0 rgb(146, 37, 78);
+    box-shadow: 5px 5px 0 0 rgb(185, 106, 2);
     background-color: white; 
     font-size: 40px;
     text-align: center;
     font-style: helvetica;
+    background-image: url("../img/kk_family_finalizada.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/kk_family_finalizada.jpeg");
+    background-size: cover;
+    background-position: center;
 }
 [id^=verso]{
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     transform: rotateY(180deg);
     border-radius: 10%;
-    box-shadow: 5px 5px 0 0 rgb(146, 37, 78);
+    box-shadow: 5px 5px 0 0 rgb(185, 106, 2);
 }
 img{
     width: 190px;
