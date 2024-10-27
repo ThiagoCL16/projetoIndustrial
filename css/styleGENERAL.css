@@ -84,7 +84,7 @@ p{
     text-align: justify;
     display: block;
 }
-#tema,#dica, #btregras, #timer{
+#tema,button, #timer{
     color:rgb(255, 255, 255);
     background-color: #000000;
     padding: 20px;
@@ -118,4 +118,12 @@ p{
 .modal-custom {
     width: 800px; /* Ajuste conforme necessário */
     max-width: 90%;/* Para garantir que não fique muito grande em telas pequenas */
+}
+*{
+    -webkit-touch-callout: none;  /* iPhone OS, Safari */
+    -webkit-user-select: none;    /* Chrome, Safari 3 */
+    -khtml-user-select: none;     /* Safari 2 */
+    -moz-user-select: none;       /* Firefox */
+    -ms-user-select: none;        /* IE10+ */
+    user-select: none;            /* Possível implementação no futuro */
 }
