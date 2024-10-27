@@ -1,55 +1,57 @@
-
-//Math.random() - gera um numero aleatorio
-//array
 const tema = document.getElementById('tema');
 const botao = document.getElementById('btmudartema');
 let img = new Array(16)
+
+
+//Índice (REMOVER NA VERSÃO FINAL)
+let criando_as_cartas
+let definindo_objetos_carta_verso
+let funcao_coloca_imgs_cartas
+let funcao_atualiza_imagens
+let adicionando_event_listener_botao_tema
+let funcao_gira_cartas
+let funcao_ler_desc_elementos
+let funcao_botao_regras
+let funcao_botao_dica
+let funcao_reiniciar_jogo
+let funcao_fim_jogo
+
+// Definição das imagens dos temas
 let temas = {
     animal: [
-        img[0] = '<img src="img/animais_jogo/abelha.com.png" data-description="abelha">',
-        img[1] ='<img src="img/animais_jogo/arara.com.png" data-description="arara">',
-        img[2] = '<img src="img/animais_jogo/barata.com.png" data-description="barata">',
-        img[3] = '<img src="img/animais_jogo/canguru.com.png" data-description="canguru">',
-        img[4] = '<img src="img/animais_jogo/caracol.com.png" data-description="caracol">',
-        img[5] = '<img src="img/animais_jogo/coala.com.png" data-description="coala">',
-        img[6] = '<img src="img/animais_jogo/coruja.com.png" data-description="coruja">',
-        img[7] = '<img src="img/animais_jogo/dinossauro.com.png" data-description="dinossauro">',
-        img[8] = '<img src="img/animais_jogo/foca.com.png" data-description="foca">',
-        img[9] = '<img src="img/animais_jogo/formiga.com.png" data-description="formiga">',
-        img[10] = '<img src="img/animais_jogo/lobo.com.png" data-description="lobo">',
-        img[11] = '<img src="img/animais_jogo/peixe.com.png" data-description="peixe">',
-        img[12] = '<img src="img/animais_jogo/pinguim.com.png" data-description="pinguim">',
-        img[13] = '<img src="img/animais_jogo/polvo.com.png" data-description="polvo">',
-        img[14] = '<img src="img/animais_jogo/tubarao.com.png" data-description="tubarao">',
-        img[15] = '<img src="img/animais_jogo/veado.com.png" data-description="veado">',
+        img[0] = '<img src="img/animais_jogo/abelha.com.png" class="user-select-none" data-description="abelha" title="abelha" alt="abelha" unselectable="on">',
+        img[1] ='<img src="img/animais_jogo/arara.com.png" class="user-select-none" data-description="arara" title="arara" alt="arara" unselectable="on">',
+        img[2] = '<img src="img/animais_jogo/barata.com.png" class="user-select-none" data-description="barata" title="barata" alt="barata" unselectable="on">',
+        img[3] = '<img src="img/animais_jogo/canguru.com.png" class="user-select-none" data-description="canguru" title="canguru" alt="canguru" unselectable="on">',
+        img[4] = '<img src="img/animais_jogo/caracol.com.png" class="user-select-none" data-description="caracol" title="caracol" alt="caracol" unselectable="on">',
+        img[5] = '<img src="img/animais_jogo/coala.com.png" class="user-select-none" data-description="coala" title="coala" alt="coala" unselectable="on">',
+        img[6] = '<img src="img/animais_jogo/coruja.com.png" class="user-select-none" data-description="coruja" title="coruja" alt="coruja" unselectable="on">',
+        img[7] = '<img src="img/animais_jogo/dinossauro.com.png" class="user-select-none" data-description="dinossauro" title="dinossauro" alt="dinossauro" unselectable="on">',
+        img[8] = '<img src="img/animais_jogo/foca.com.png" class="user-select-none" data-description="foca" title="foca" alt="foca" unselectable="on">',
+        img[9] = '<img src="img/animais_jogo/formiga.com.png" class="user-select-none" data-description="formiga" title="formiga" alt="formiga" unselectable="on">',
+        img[10] = '<img src="img/animais_jogo/lobo.com.png" class="user-select-none" data-description="lobo" title="lobo" alt="lobo" unselectable="on">',
+        img[11] = '<img src="img/animais_jogo/peixe.com.png" class="user-select-none" data-description="peixe" title="peixe" alt="peixe" unselectable="on">',
+        img[12] = '<img src="img/animais_jogo/pinguim.com.png" class="user-select-none" data-description="pinguim" title="pinguim" alt="pinguim" unselectable="on">',
+        img[13] = '<img src="img/animais_jogo/polvo.com.png" class="user-select-none" data-description="polvo" title="polvo" alt="polvo" unselectable="on">',
+        img[14] = '<img src="img/animais_jogo/tubarao.com.png" class="user-select-none" data-description="tubarao" title="tubarao" alt="tubarao" unselectable="on">',
+        img[15] = '<img src="img/animais_jogo/veado.com.png" class="user-select-none" data-description="veado" title="veado" alt="veado" unselectable="on">',
     ],
     fruta: [
-        img[0] = '<img src="img/frutas_jogo/banana.jpg" data-description="banana">',
-        img[1] = '<img src="img/frutas_jogo/abacate.jpg" data-description="abacate">',
-        img[2] = '<img src="img/frutas_jogo/laranja.jpg" data-description="laranja">',
-        img[3] = '<img src="img/frutas_jogo/limao.jpg" data-description="limao">',
-        img[4] = '<img src="img/frutas_jogo/melancia.jpg" data-description="melancia">',
-        img[5] = '<img src="img/frutas_jogo/mirtilo.jpg" data-description="mirtilo">',
-        img[6] = '<img src="img/frutas_jogo/morango.jpg" data-description="morango">',
-        img[7] = '<img src="img/frutas_jogo/pessego.jpg" data-description="pessego">',
-        img[8] = '<img src="img/frutas_jogo/uva.jpg" data-description="uva">',
+        img[0] = '<img src="img/frutas_jogo/banana.jpg" data-description="banana" title="banana" alt="banana" unselectable="on">',
+        img[1] = '<img src="img/frutas_jogo/abacate.jpg" data-description="abacate" title="abacate" alt="abacate" unselectable="on">',
+        img[2] = '<img src="img/frutas_jogo/laranja.jpg" data-description="laranja" title="laranja" alt="laranja" unselectable="on">',
+        img[3] = '<img src="img/frutas_jogo/limao.jpg" data-description="limao" title="limao" alt="limao">',
+        img[4] = '<img src="img/frutas_jogo/melancia.jpg" data-description="melancia" title="melancia" alt="melancia" unselectable="on">',
+        img[5] = '<img src="img/frutas_jogo/mirtilo.jpg" data-description="mirtilo" title="mirtilo" alt="mirtilo" unselectable="on">',
+        img[6] = '<img src="img/frutas_jogo/morango.jpg" data-description="morango" title="morango" alt="morango" unselectable="on">',
+        img[7] = '<img src="img/frutas_jogo/pessego.jpg" data-description="pessego" title="pessego" alt="pessego" unselectable="on">',
+        img[8] = '<img src="img/frutas_jogo/uva.jpg" data-description="uva" title="uva" alt="uva" unselectable="on">',
     ]
 };
 
-// Defina o array img
-
-
-// Preencha o array img com as imagens do tema selecionado
-
-
-// Inicializa as imagens quando a página carrega
-
-
-
-
-
 let jogoMemoria = document.getElementById('jogoMemoria');
 
+// Criando os objetos de pontuação e timer
 let Pontuacao = new Object()
 Pontuacao.pontos = 0
 Pontuacao.elemento = document.getElementById('pontuacao')
@@ -63,7 +65,7 @@ Timer.segundos = 0
 Timer.ativo = false
 
 Timer.atualizaTimer = function(){
-    if(Timer.ativo == true){
+    if(Timer.ativo){
         Timer.segundos++
         if(Timer.segundos % 60 == 0){
             Timer.segundos = 0
@@ -76,16 +78,17 @@ Timer.atualizaTimer = function(){
             Timer.minutos = '0' + parseInt(Timer.minutos)
         }
         Timer.elemento.innerHTML = Timer.minutos + ':' + Timer.segundos
-        if(Timer.ativo == true){
+        if(Timer.ativo){
             setTimeout(Timer.atualizaTimer, 1000)
         }
     }
 }
-function fimJogo(){
-    Timer.ativo = false
-}
 
+// Inicializando o elemento da pontuação
 Pontuacao.elemento.innerHTML = `PONTUAÇÃO: ${Pontuacao.pontos}`
+
+definindo_objetos_carta_verso
+// Definido os objetos carta e verso
 class carta{
     constructor(elemento, indice, Verso){
         this.elemento = elemento
@@ -120,6 +123,7 @@ class verso{
         this.elemento = elemento
     }
 }
+criando_as_cartas
 // Criando as cartas
 let container = new Array(18)
 let Carta = new Array(18)
@@ -155,6 +159,8 @@ for(i=0; i<18; i++) { //laco da base das cartas
     texto[i] = ""
 }
 
+funcao_coloca_imgs_cartas
+// Função de colocar as imagens nas cartas
 function colocaImgsCartas(){
     for(let i=0; i<9; i++){
         if(img.length>9){
@@ -181,6 +187,8 @@ function colocaImgsCartas(){
     }
 }
 
+// Função atualiza imagens
+funcao_atualiza_imagens
 function atualizarImagens() {
     const temaSelecionado = tema.value;
     img.length = 0; // Limpa o array img
@@ -217,8 +225,16 @@ function atualizarImagens() {
     colocaImgsCartas()
 }
 atualizarImagens()
+
+adicionando_event_listener_botao_tema
 // Atualiza as imagens ao mudar de tema
 tema.addEventListener('change', f = () =>{
+    Pontuacao.pontos = 0
+    Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
+
+    Timer.ativo = false
+    Timer.segundos = Timer.minutos = 0
+    Timer.elemento.innerHTML = 'TEMPO'
     atualizarImagens()
     const elementosComDescricao = document.querySelectorAll('[data-description]');
 
@@ -228,8 +244,11 @@ tema.addEventListener('change', f = () =>{
         }
     });
 });
-let totalCartas = 18
 
+// Função de girar as cartas
+funcao_gira_cartas
+
+let totalCartas = 18
 let cartaVirada
 let qtdCartaVirada = 0
 function giraCarta(indice){
@@ -255,6 +274,7 @@ function giraCarta(indice){
                 qtdCartaVirada++
             } else if(qtdCartaVirada == 1 && cartaVirada.indice != Verso[indice].indice) {
                 if(imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice){
+                    // Acerto
                     Pontuacao.pontos += Pontuacao.acerto
                     Pontuacao.elemento.innerHTML = `PONTUAÇÃO: ${Pontuacao.pontos}`
                     cartaVirada.elemento.parentNode.innerHTML = ""
@@ -264,6 +284,7 @@ function giraCarta(indice){
                         fimJogo()
                     }
                 } else if(imgCartaVirada != Verso[indice].img){
+                    // Erro
                     cartaVirada.elemento.style.transform = 'translateY(0)'
                     cartaVirada.virada = false
                     Carta[indice].elemento.style.transform = 'translateY(0)' 
@@ -292,13 +313,14 @@ for(let carta of cartas) {
          
     }
 }
-    
+
+// Função de ler descrição dos elementos
+funcao_ler_desc_elementos
 function lerDescricaoElemento(elemento) {
     speechSynthesis.cancel()
     const utterance = new SpeechSynthesisUtterance(elemento.dataset.description);
     speechSynthesis.speak(utterance);
 }
-
 
 const elementosComDescricao = document.querySelectorAll('[data-description]');
 
@@ -307,6 +329,9 @@ elementosComDescricao.forEach(elemento => {
       lerDescricaoElemento(elemento);
     }
 });
+
+// Função do botão de regras
+funcao_botao_regras
 document.getElementById("btregras").addEventListener("click", function() {
     const regrasDescricao = "O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência visual. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela";
 
@@ -335,7 +360,8 @@ document.getElementById("btregras").addEventListener("click", function() {
     btsairregras[0].onmouseover = () => lerDescricaoElemento(btsairregras[0])
 });
 
-
+// Função botão de dica
+funcao_botao_dica
 dica = document.getElementById("dica")
 dica.onclick = function(){
     let audio = new Audio('audio/cartagiro2.mp3')
@@ -371,4 +397,33 @@ dica.onclick = function(){
         Carta[sorteio].elemento.style.transform = 'rotateY(0)'
         Carta[sorteio].virada = false
     }, 2 * 1000)
+}
+
+// Função de reiniciar o jogo
+funcao_reiniciar_jogo
+let btReiniciaJogo = document.getElementById('btReiniciaJogo')
+btReiniciaJogo.onclick = function ReiniciaJogo(){
+    Pontuacao.pontos = 0
+    Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
+
+    Timer.ativo = false
+    Timer.segundos = Timer.minutos = 0
+    Timer.elemento.innerHTML = 'TEMPO'
+
+    atualizarImagens()
+    const elementosComDescricao = document.querySelectorAll('[data-description]');
+
+    elementosComDescricao.forEach(elemento => {
+        elemento.onmouseover =  function(){
+            lerDescricaoElemento(elemento);
+        }
+    });
+}
+
+
+
+// Função de fim do jogo
+funcao_fim_jogo
+function fimJogo(){
+    Timer.ativo = false
 }
