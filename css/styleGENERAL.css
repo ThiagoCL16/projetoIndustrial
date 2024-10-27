@@ -84,10 +84,6 @@ p{
     text-align: justify;
     display: block;
 }
-/*.btsairregras{
-    color:rgb(249, 85, 112);
-    background-color: #fff;
-}*/
 #tema,#dica, #btregras, #timer{
     color:rgb(255, 255, 255);
     background-color: #000000;
@@ -105,4 +101,21 @@ p{
     margin-right: 35%;
     padding: 10px;
     
+}
+.titulo {
+    font-size: 40px; /* Aumenta o tamanho da fonte do título */
+}
+
+.texto {
+    font-size: 30px; /* Aumenta o tamanho da fonte do texto */
+}
+
+.btsairregras {
+    font-size: 45px; /* Aumenta o tamanho da fonte do botão */
+    padding: 20px 20px; /* Adiciona um pouco de espaçamento ao botão */
+    border-radius: 5px;
+}
+.modal-custom {
+    width: 800px; /* Ajuste conforme necessário */
+    max-width: 90%;/* Para garantir que não fique muito grande em telas pequenas */
 }
