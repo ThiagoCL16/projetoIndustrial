@@ -266,7 +266,7 @@ function giraCarta(indice){
         audio.play()
         Carta[indice].elemento.style.transform = 'rotateY(180deg)'
         Carta[indice].virada = true
-        //setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function corpo conciso
+        //setTimeout(voltaCarta = () => Carta[indice].elemento.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function de corpo conciso
         setTimeout(verificaCartas = () => {
             if(qtdCartaVirada == 0){
                 cartaVirada = Carta[indice]
@@ -318,8 +318,8 @@ for(let carta of cartas) {
 funcao_ler_desc_elementos
 function lerDescricaoElemento(elemento) {
     speechSynthesis.cancel()
-    const utterance = new SpeechSynthesisUtterance(elemento.dataset.description);
-    speechSynthesis.speak(utterance);
+    const enunciado = new SpeechSynthesisUtterance(elemento.dataset.description);
+    speechSynthesis.speak(enunciado);
 }
 
 const elementosComDescricao = document.querySelectorAll('[data-description]');
