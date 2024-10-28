@@ -14,26 +14,26 @@
     
 </head>
 <body>
-    
-    <div id="wrapper"></div>
+
+    <div id="wrapper" class="user-select-none" unselectable="on" ></div>
     <br>
     <!-- <button id="testes" onclick="giraCartas()">girar todas as cartas</button> -->
-    <div id="timer">TEMPO</div>
-    <div id="jogoMemoria"></div>
+    <div id="timer" class="user-select-none" unselectable="on">TEMPO</div>
+    <div id="jogoMemoria" class="user-select-none" unselectable="on"></div>
     
-   <button id="btregras" data-description="regras">REGRAS</button>
+   <button id="btregras" data-description="regras" tabindex="19" class="user-select-none" unselectable="on">REGRAS</button>
    <br>
-   <button id="dica" data-description="dica">DICA</button>
+   <button id="dica" data-description="dica" tabindex="20" class="user-select-none" unselectable="on">DICA</button>
     <br>
-    <div id="pontuacao"></div>
-   <label for="tema" id="tematxt" data-description="Selecione o tema">SELECIONE O TEMA: </label>
+    <div id="pontuacao" class="user-select-none" unselectable="on"></div>
+   <label for="tema" id="tematxt" class="user-select-none" unselectable="on">SELECIONE O TEMA: </label>
    <br>
-   <select id="tema">
-    <option value="animal" data-description="animais">ANIMAIS</option>
-    <option value="fruta"  data-description="frutas" >FRUTAS</option>
+   <select id="tema" data-description="Selecione o tema" class="user-select-none" unselectable="on" tabindex="21">
+    <option value="animal" data-description="animais" class="user-select-none" unselectable="on" tabindex="22">ANIMAIS</option>
+    <option value="fruta"  data-description="frutas" class="user-select-none" unselectable="on" tabindex="23">FRUTAS</option>
    </select>
    <br>
-   
+   <button type="button" id="btReiniciaJogo" data-description="Reiniciar jogo" class="user-select-none" unselectable="on">Reiniciar jogo</button>
 
     <!--
     Modelo das cartas:
