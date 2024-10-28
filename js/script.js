@@ -223,49 +223,60 @@ let totalCartas = 18
 
 let cartaVirada
 let qtdCartaVirada = 0
-function giraCarta(indice){
-    if(Carta[indice].virada == false){
-        if(Timer.ativo == false){
-            Timer.ativo = true
-            Timer.atualizaTimer()
+let emVerificacao = false; // Controle de verificação
+
+function giraCarta(indice) {
+    // Bloqueia novas viradas se já em verificação de um par
+    if (Carta[indice].virada === false && !emVerificacao) { 
+        if (Timer.ativo === false) {
+            Timer.ativo = true;
+            Timer.atualizaTimer();
         }
-        //alert(Carta[indice].elemento.children[0])
-        lerDescricao(Carta[indice].elemento.children[0])
+
+        lerDescricao(Carta[indice].elemento.children[0]);
         setTimeout(() => {
-            lerDescricao(Verso[indice].elemento.children[0])
-        }, 1500)
-        
-        let audio = new Audio('audio/cartagiro2.mp3')
-        audio.play()
-        Carta[indice].elemento.style.transform = 'rotateY(180deg)'
-        Carta[indice].virada = true
-        //setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function corpo conciso
-        setTimeout(verificaCartas = () => {
-            if(qtdCartaVirada == 0){
-                cartaVirada = Carta[indice]
-                imgCartaVirada = Verso[indice].img
-                qtdCartaVirada++
-            } else if(qtdCartaVirada == 1 && cartaVirada.indice != Verso[indice].indice) {
-                if(imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice){
-                    Pontuacao.pontos += Pontuacao.acerto
-                    Pontuacao.elemento.innerHTML = `Pontuação: ${Pontuacao.pontos}`
-                    cartaVirada.elemento.parentNode.innerHTML = ""
-                    Carta[indice].elemento.parentNode.innerHTML = ""
-                    totalCartas -= 2
-                    if(totalCartas == 0){
-                        fimJogo()
+            lerDescricao(Verso[indice].elemento.children[0]);
+        }, 1500);
+
+        let audio = new Audio('audio/cartagiro2.mp3');
+        audio.play();
+        Carta[indice].elemento.style.transform = 'rotateY(180deg)';
+        Carta[indice].virada = true;
+
+        if (qtdCartaVirada === 0) {
+            // Primeira carta virada
+            cartaVirada = Carta[indice];
+            imgCartaVirada = Verso[indice].img;
+            qtdCartaVirada++;
+        } else if (qtdCartaVirada === 1) {
+            // Segunda carta virada, inicia verificação de par
+            emVerificacao = true; // Ativa bloqueio para verificação do par
+
+            setTimeout(() => {
+                if (imgCartaVirada === Verso[indice].img && Carta[indice].indice !== cartaVirada.indice) {
+                    // Par correto
+                    Pontuacao.pontos += Pontuacao.acerto;
+                    Pontuacao.elemento.innerHTML = `Pontuação: ${Pontuacao.pontos}`;
+                    cartaVirada.elemento.parentNode.innerHTML = "";
+                    Carta[indice].elemento.parentNode.innerHTML = "";
+                    totalCartas -= 2;
+                    if (totalCartas === 0) {
+                        fimJogo();
                     }
-                } else if(imgCartaVirada != Verso[indice].img){
-                    cartaVirada.elemento.style.transform = 'translateY(0)'
-                    cartaVirada.virada = false
-                    Carta[indice].elemento.style.transform = 'translateY(0)' 
-                    Carta[indice].virada = false
+                } else {
+                    // Par incorreto, vira as cartas de volta
+                    cartaVirada.elemento.style.transform = 'rotateY(0)';
+                    cartaVirada.virada = false;
+                    Carta[indice].elemento.style.transform = 'rotateY(0)';
+                    Carta[indice].virada = false;
                 }
-                qtdCartaVirada = 0
-            }
-        }, 1.5 * 1000)
+                qtdCartaVirada = 0;
+                emVerificacao = false; // Libera para novas viradas após a verificação
+            }, 1.5 * 1000);
+        }
     }
 }
+
 let cartas = document.getElementsByClassName('carta');
 
 
