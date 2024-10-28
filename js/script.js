@@ -55,8 +55,8 @@ let jogoMemoria = document.getElementById('jogoMemoria');
 let Pontuacao = new Object()
 Pontuacao.pontos = 0
 Pontuacao.elemento = document.getElementById('pontuacao')
-Pontuacao.acerto = 10
-Pontuacao.dica = 5
+Pontuacao.acerto = 10 
+Pontuacao.dica = 5 
 
 let Timer = new Object()
 Timer.elemento = document.getElementById('timer')
@@ -192,6 +192,8 @@ funcao_atualiza_imagens
 function atualizarImagens() {
     const temaSelecionado = tema.value;
     img.length = 0; // Limpa o array img
+    Pontuacao.pontos = 0
+    Pontuacao.elemento.innerHTML = 'Pontuação: ' + Pontuacao.pontos
    
 
     img.push(...temas[temaSelecionado]); // Adiciona as imagens do tema selecionado
@@ -274,7 +276,9 @@ function giraCarta(indice){
                 qtdCartaVirada++
             } else if(qtdCartaVirada == 1 && cartaVirada.indice != Verso[indice].indice) {
                 if(imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice){
-                    // Acerto
+                    //acerto
+                    let audioAcerto = new Audio('audio/acerto.mp3')
+                    audioAcerto.play()
                     Pontuacao.pontos += Pontuacao.acerto
                     Pontuacao.elemento.innerHTML = `PONTUAÇÃO: ${Pontuacao.pontos}`
                     cartaVirada.elemento.parentNode.innerHTML = ""
@@ -284,11 +288,14 @@ function giraCarta(indice){
                         fimJogo()
                     }
                 } else if(imgCartaVirada != Verso[indice].img){
-                    // Erro
+                    //erro
+                    let audioErro = new Audio('audio/erro.mp3')
+                    audioErro.play()
                     cartaVirada.elemento.style.transform = 'translateY(0)'
                     cartaVirada.virada = false
                     Carta[indice].elemento.style.transform = 'translateY(0)' 
-                    Carta[indice].virada = false
+                    Carta[indice].virada = false  
+                    
                 }
                 qtdCartaVirada = 0
             }
