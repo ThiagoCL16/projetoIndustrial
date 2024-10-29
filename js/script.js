@@ -270,7 +270,7 @@ function giraCarta(indice){
         Carta[indice].elemento.style.transform = 'rotateY(180deg)'
         
         Carta[indice].virada = true
-        
+        }
         //setTimeout(voltaCarta = () => carta.style.transform = 'rotateY(0)', 10 * 1000) // voltaCarta: arrow function corpo conciso
         setTimeout(verificaCartas = () => {
             if(qtdCartaVirada == 0){
@@ -303,7 +303,7 @@ function giraCarta(indice){
                 qtdCartaVirada = 0
             }
         }, 1.5 * 1000)
-    }
+    
 
 let cartas = document.getElementsByClassName('carta');
 
