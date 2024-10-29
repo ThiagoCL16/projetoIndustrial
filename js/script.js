@@ -4,8 +4,10 @@ let img = new Array(16)
 
 
 //Índice (REMOVER NA VERSÃO FINAL)
-let criando_as_cartas
+
+let definindo_objetos_pontuacao_timer
 let definindo_objetos_carta_verso
+let criando_as_cartas
 let funcao_coloca_imgs_cartas
 let funcao_atualiza_imagens
 let adicionando_event_listener_botao_tema
@@ -51,6 +53,7 @@ let temas = {
 
 let jogoMemoria = document.getElementById('jogoMemoria');
 
+definindo_objetos_pontuacao_timer
 // Criando os objetos de pontuação e timer
 let Pontuacao = new Object()
 Pontuacao.pontos = 0
@@ -78,6 +81,7 @@ Timer.atualizaTimer = function(){
             Timer.minutos = '0' + parseInt(Timer.minutos)
         }
         Timer.elemento.innerHTML = Timer.minutos + ':' + Timer.segundos
+        Timer.elemento.setAttribute('data-description', `${parseInt(Timer.minutos)} minutos e ${parseInt(Timer.segundos)} segundos`)
         if(Timer.ativo){
             setTimeout(Timer.atualizaTimer, 1000)
         }
@@ -193,7 +197,8 @@ function atualizarImagens() {
     const temaSelecionado = tema.value;
     img.length = 0; // Limpa o array img
     Pontuacao.pontos = 0
-    Pontuacao.elemento.innerHTML = 'Pontuação: ' + Pontuacao.pontos
+    Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
+    Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
    
 
     img.push(...temas[temaSelecionado]); // Adiciona as imagens do tema selecionado
@@ -233,6 +238,7 @@ adicionando_event_listener_botao_tema
 tema.addEventListener('change', f = () =>{
     Pontuacao.pontos = 0
     Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
+    Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
 
     Timer.ativo = false
     Timer.segundos = Timer.minutos = 0
@@ -289,6 +295,7 @@ function giraCarta(indice) {
                     audioAcerto.play();
                     Pontuacao.pontos += Pontuacao.acerto;
                     Pontuacao.elemento.innerHTML = `PONTUAÇÃO: ${Pontuacao.pontos}`;
+                    Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
                     cartaVirada.elemento.parentNode.innerHTML = "";
                     Carta[indice].elemento.parentNode.innerHTML = "";
                     totalCartas -= 2;
@@ -410,6 +417,7 @@ dica.onclick = function(){
     }
     Pontuacao.pontos -= Pontuacao.dica
     Pontuacao.elemento.innerHTML = `PONTUAÇÃO: ${Pontuacao.pontos}`
+    Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
     setTimeout(function(){
         Carta[sorteio].elemento.style.transform = 'rotateY(0)'
         Carta[sorteio].virada = false
@@ -422,10 +430,12 @@ let btReiniciaJogo = document.getElementById('btReiniciaJogo')
 btReiniciaJogo.onclick = function ReiniciaJogo(){
     Pontuacao.pontos = 0
     Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
+    Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
 
     Timer.ativo = false
     Timer.segundos = Timer.minutos = 0
     Timer.elemento.innerHTML = 'TEMPO'
+    Timer.elemento.setAttribute('data-description', 'Tempo')
 
     atualizarImagens()
     const elementosComDescricao = document.querySelectorAll('[data-description]');
