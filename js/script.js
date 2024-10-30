@@ -15,6 +15,7 @@ let funcao_gira_cartas
 let funcao_ler_desc_elementos
 let funcao_botao_regras
 let funcao_botao_dica
+let funcao_ler_texto
 let funcao_reiniciar_jogo
 let funcao_fim_jogo
 
@@ -54,7 +55,7 @@ let temas = {
 let jogoMemoria = document.getElementById('jogoMemoria');
 
 definindo_objetos_pontuacao_timer
-// Criando os objetos de pontuação e timer
+// Criando os objetos de pontuacao e timer
 let Pontuacao = new Object()
 Pontuacao.pontos = 0
 Pontuacao.elemento = document.getElementById('pontuacao')
@@ -81,7 +82,7 @@ Timer.atualizaTimer = function(){
             Timer.minutos = '0' + parseInt(Timer.minutos)
         }
         Timer.elemento.innerHTML = Timer.minutos + ':' + Timer.segundos
-        Timer.elemento.setAttribute('data-description', `${parseInt(Timer.minutos)} minutos e ${parseInt(Timer.segundos)} segundos`)
+        Timer.elemento.setAttribute('data-description', `Tempo: ${parseInt(Timer.minutos)} minutos e ${parseInt(Timer.segundos)} segundos`)
         if(Timer.ativo){
             setTimeout(Timer.atualizaTimer, 1000)
         }
@@ -292,6 +293,7 @@ function giraCarta(indice) {
                 if (imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice) {
                     // Par correto
                     let audioAcerto = new Audio('audio/acerto.mp3');
+                    audioAcerto.volume = 1
                     audioAcerto.play();
                     Pontuacao.pontos += Pontuacao.acerto;
                     Pontuacao.elemento.innerHTML = `PONTUAÇÃO: ${Pontuacao.pontos}`;
@@ -305,6 +307,7 @@ function giraCarta(indice) {
                 } else {
                     // Par incorreto, vira as cartas de volta
                     let audioErro = new Audio('audio/erro.mp3');
+                    audioErro.volume = 0.6 // Diminui o volume (ajustar conforme o necessário: 0 - 0%, 1 - 100%)
                     audioErro.play();
                     cartaVirada.elemento.style.transform = 'translateY(0)';
                     cartaVirada.virada = false;
@@ -341,6 +344,7 @@ for(let carta of cartas) {
 // Função de ler descrição dos elementos
 funcao_ler_desc_elementos
 function lerDescricaoElemento(elemento) {
+    console.log(elemento)
     speechSynthesis.cancel()
     const enunciado = new SpeechSynthesisUtterance(elemento.dataset.description);
     speechSynthesis.speak(enunciado);
@@ -375,7 +379,7 @@ document.getElementById("btregras").addEventListener("click", function() {
     });
 
     // Lê a descrição das regras
-    lerDescricaoElemento({dataset: { description: regrasDescricao}});
+    lerTexto(regrasDescricao);
 
     let btsairregras = document.getElementsByClassName('swal2-styled')
 
@@ -401,20 +405,12 @@ dica.onclick = function(){
         const numeroCarta = sorteio + 1; // Para exibir a carta começando de 1
         const descricaoCompleta = `Carta ${numeroCarta}: ${verso}`; // Descrição completa
     
-        // Adiciona log para verificar a descrição
-        console.log(descricaoCompleta);
-    
         // Chama a função para falar a descrição
-        lerDescricao({ dataset: { description: descricaoCompleta } });
+        lerTexto(descricaoCompleta);
     } else {
         console.error("Verso ou elemento não encontrado para a carta sorteada.");
     }
     
-    function lerDescricao(descricao) {
-        const utterance = new SpeechSynthesisUtterance(descricao.dataset.description);
-        console.log("Fazendo a leitura: ", descricao.dataset.description); // Log de teste
-        speechSynthesis.speak(utterance);
-    }
     Pontuacao.pontos -= Pontuacao.dica
     Pontuacao.elemento.innerHTML = `PONTUAÇÃO: ${Pontuacao.pontos}`
     Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
@@ -422,6 +418,14 @@ dica.onclick = function(){
         Carta[sorteio].elemento.style.transform = 'rotateY(0)'
         Carta[sorteio].virada = false
     }, 2 * 1000)
+}
+
+// Função de ler texto
+funcao_ler_texto
+function lerTexto(texto) {
+    console.log(texto)
+    const enunciado = new SpeechSynthesisUtterance(texto);
+    speechSynthesis.speak(enunciado);
 }
 
 // Função de reiniciar o jogo
@@ -453,4 +457,84 @@ btReiniciaJogo.onclick = function ReiniciaJogo(){
 funcao_fim_jogo
 function fimJogo(){
     Timer.ativo = false
+    // Criando o modal ("alert") de fim de jogo
+    setTimeout(() => {
+        let containerModal = document.getElementById('containerModalFimJogo')
+        
+        
+        let fundoModal = document.createElement('div')
+        fundoModal.id = 'fundoModalFimJogo'
+        fundoModal.style.height = `${window.innerHeight}px`
+        fundoModal.style.width = `${window.innerWidth}px`
+        containerModal.appendChild(fundoModal)
+        
+        lerTexto('Parabéns, você venceu o jogo!')
+        setTimeout(() => fundoModal.style.backgroundColor = 'rgba(50, 50, 50, 0.5)', 200)
+
+        setTimeout(criaModal = () => {
+            let modal = document.createElement('div')
+            let pontuacao = document.getElementById('pontuacao').innerHTML
+            let pontuacaoModal = document.createElement('p')
+            let tempo = document.getElementById('timer').innerHTML
+            let timerModal = document.createElement('div')
+            let msgAgradecimento = document.createElement('b')
+            let btSaiModal = document.createElement('button')
+
+            modal.id = 'modalFimJogo'
+            containerModal.appendChild(modal)
+            setTimeout(() => modal.style.backgroundColor = 'rgba(245, 245, 245, 1)', 0.2 * 1000)
+            
+            pontuacaoModal.id = 'pontuacaoModalFimJogo'
+            pontuacaoModal.className = 'itensModalFimJogo'
+            pontuacaoModal.innerHTML = pontuacao
+            pontuacaoModal.setAttribute('data-description', pontuacao)
+            modal.appendChild(pontuacaoModal)
+            setTimeout(() => lerDescricaoElemento(pontuacaoModal), 3 * 1000)
+            setTimeout(() => {
+                pontuacaoModal.style.color = 'rgba(0, 0, 0, 1)'
+                
+            }, 0.7 * 1000)
+
+            timerModal.id = 'timerModalFimJogo'
+            timerModal.className = 'itensModalFimJogo'
+            timerModal.innerHTML = 'Tempo: ' + tempo
+            timerModal.setAttribute('data-description', `Tempo: ${parseInt(Timer.minutos)} minutos e ${parseInt(Timer.segundos)} segundos`)
+            modal.appendChild(timerModal)
+            setTimeout(() => lerDescricaoElemento(timerModal), 7 * 1000)
+            setTimeout(() => timerModal.style.color = 'rgba(0, 0, 0, 1)', 0.7 * 2 * 1000)
+
+            msgAgradecimento.id = 'msgAgradecimentoFimJogo'
+            msgAgradecimento.className = 'itensModalFimJogo'
+            msgAgradecimento.innerHTML = 'Obrigado por jogar!'
+            msgAgradecimento.setAttribute('data-description', 'Obrigado por jogar!')
+            modal.appendChild(msgAgradecimento)
+            setTimeout(() => lerDescricaoElemento(msgAgradecimento), 12 * 1000)
+            setTimeout(() => {
+                msgAgradecimento.style.color = 'rgba(0, 0, 0, 1)'
+                msgAgradecimento.classList.add('muda-de-cor')
+            }, 0.7 * 3 * 1000)
+
+            btSaiModal.id = 'btSaiModalFimJogo'
+            btSaiModal.className = 'itensModalFimJogo'
+            btSaiModal.innerHTML ='Fechar'
+            btSaiModal.setAttribute('data-description', 'Fechar')
+            btSaiModal.setAttribute('onclick', 'limpaModal()')
+            
+            modal.appendChild(btSaiModal)
+            setTimeout(() => btSaiModal.style.display = 'block', 0.7 * 4 * 1000)
+
+            const itensModalFimJogo = document.querySelectorAll('.itensModalFimJogo[data-description]')
+            itensModalFimJogo.forEach(elemento => {
+                console.log(elemento)
+                elemento.onmouseover =  function(){
+                  lerDescricaoElemento(elemento);
+                }
+            });
+        }, 0.5 * 1000)
+        
+        fundoModal.addEventListener("click", limpaModal = () => {
+            fundoModal.parentNode.innerHTML = ""
+            fundoModal.removeEventListener('click', limpaModal)
+        })
+    }, 2 * 1000)
 }
