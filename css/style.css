@@ -95,6 +95,7 @@ p{
 }
 #pontuacao, #timer, #tematxt{
     font-size: 30px;
+    width: fit-content;
 }
 #timer{
     float: right;
@@ -126,4 +127,64 @@ p{
     -moz-user-select: none;       /* Firefox */
     -ms-user-select: none;        /* IE10+ */
     user-select: none;            /* Possível implementação no futuro */
+}
+
+#fundoModalFimJogo{
+    background-color:rgba(0, 0, 0, 0);
+    transition: background-color 500ms;
+    width: auto;
+    z-index: 0;
+    position: absolute;
+    top:0;
+    left:0
+}
+#modalFimJogo{
+    width: 500px;
+    height: 600px;
+    position: absolute;
+    margin-left:auto;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 500ms;
+    left:50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.itensModalFimJogo{
+    width: fit-content;
+    height:auto;
+    margin:auto;
+    margin-top: 20px;
+    position:relative;
+}
+.itensModalFimJogo:not(#btSaiModalFimJogo){
+    color:rgba(0, 0, 0, 0);
+    transition: color 500ms
+}
+#btSaiModalFimJogo{
+    display:none;
+    transition: display 500ms
+}
+#msgAgradecimentoFimJogo{
+    display: block;
+    margin-top:20px;
+}
+.muda-de-cor{
+    animation-name: mudaCor;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+@keyframes mudaCor{
+    0%{
+        color:rgb(255, 0, 0)
+    }
+    33.3%{
+        color: rgb(0, 255, 0)
+    }
+    66.7%{
+        color: rgb(0, 0, 255)
+    }
+    100%{
+        color: rgb(255, 0, 0)
+    }
 }
