@@ -59,6 +59,7 @@ p{
     text-align: center;
     padding-top: auto;
 }
+
 #jogoMemoria{
     width: 1242px;
     height: 621px;
@@ -66,6 +67,7 @@ p{
     float: right;
     margin-right: 10px;
 }
+
 .msgregras{
     background-color: aqua;
     color: black;
@@ -74,16 +76,20 @@ p{
     display:none;
     position: absolute;
 }
+
 .mostrar{
     display: block;
 }
+
 .titulo{/*das regras*/
     text-align: center;
 }
+
 .texto{/*das regras*/
     text-align: justify;
     display: block;
 }
+
 #tema,button, #timer{
     color:rgb(255, 255, 255);
     background-color: #000000;
@@ -93,16 +99,18 @@ p{
     font-size: 35px;
     border-color: white;
 }
+
 #pontuacao, #timer, #tematxt{
     font-size: 30px;
     width: fit-content;
 }
+
 #timer{
     float: right;
     margin-right: 35%;
     padding: 10px;
-    
 }
+
 .titulo {
     font-size: 40px; /* Aumenta o tamanho da fonte do título */
 }
@@ -116,10 +124,12 @@ p{
     padding: 20px 20px; /* Adiciona um pouco de espaçamento ao botão */
     border-radius: 5px;
 }
+
 .modal-custom {
     width: 800px; /* Ajuste conforme necessário */
     max-width: 90%;/* Para garantir que não fique muito grande em telas pequenas */
 }
+
 *{
     -webkit-touch-callout: none;  /* iPhone OS, Safari */
     -webkit-user-select: none;    /* Chrome, Safari 3 */
@@ -138,6 +148,7 @@ p{
     top:0;
     left:0
 }
+
 #modalFimJogo{
     width: 500px;
     height: 600px;
@@ -150,30 +161,55 @@ p{
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
 .itensModalFimJogo{
     width: fit-content;
     height:auto;
-    margin:auto;
-    margin-top: 20px;
     position:relative;
+    margin:auto
 }
-.itensModalFimJogo:not(#btSaiModalFimJogo){
+
+.itensModalFimJogo:not(button){
     color:rgba(0, 0, 0, 0);
-    transition: color 500ms
+    transition: color 500ms;
+    margin-top: 20px;
 }
-#btSaiModalFimJogo{
+
+#divBotoesModalFimJogo{
+    width: 427px;
+    height: 90px;
+    margin: 20px auto auto auto
+}
+
+#divBotoesModalFimJogo>*{
+    float: left;
+    margin: 0 !important
+}
+
+#btSaiModalFimJogo, #btReiniciaJogoModal{
     display:none;
     transition: display 500ms
 }
+
+#btSaiModalFimJogo{
+    background-color: red;
+}
+
+#btReiniciaJogoModal{
+    margin-right: 10px;
+}
+
 #msgAgradecimentoFimJogo{
     display: block;
     margin-top:20px;
 }
+
 .muda-de-cor{
     animation-name: mudaCor;
     animation-duration: 3s;
     animation-iteration-count: infinite;
 }
+
 @keyframes mudaCor{
     0%{
         color:rgb(255, 0, 0)
@@ -188,3 +224,4 @@ p{
         color: rgb(255, 0, 0)
     }
 }
+

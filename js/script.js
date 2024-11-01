@@ -431,7 +431,7 @@ function lerTexto(texto) {
 // Função de reiniciar o jogo
 funcao_reiniciar_jogo
 let btReiniciaJogo = document.getElementById('btReiniciaJogo')
-btReiniciaJogo.onclick = function ReiniciaJogo(){
+btReiniciaJogo.onclick = function reiniciaJogo(){
     Pontuacao.pontos = 0
     Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
     Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
@@ -478,7 +478,9 @@ function fimJogo(){
             let tempo = document.getElementById('timer').innerHTML
             let timerModal = document.createElement('div')
             let msgAgradecimento = document.createElement('b')
+            let btReiniciaJogoModal = document.createElement('button')
             let btSaiModal = document.createElement('button')
+            let divBotoes = document.createElement('div')
 
             modal.id = 'modalFimJogo'
             containerModal.appendChild(modal)
@@ -514,14 +516,26 @@ function fimJogo(){
                 msgAgradecimento.classList.add('muda-de-cor')
             }, 0.7 * 3 * 1000)
 
+            divBotoes.id = 'divBotoesModalFimJogo'
+            modal.appendChild(divBotoes)
+
+            btReiniciaJogoModal.id = 'btReiniciaJogoModal'
+            btReiniciaJogoModal.className = 'itensModalFimJogo'
+            btReiniciaJogoModal.innerHTML = 'Reiniciar jogo'
+            btReiniciaJogoModal.setAttribute('data-description', 'Reiniciar jogo')
+            btReiniciaJogoModal.setAttribute('onclick', 'reiniciaJogo()')
+
+            divBotoes.appendChild(btReiniciaJogoModal)
+            setTimeout(() => btReiniciaJogoModal.style.display = 'block', 0.7 * 4 * 1000)
+
             btSaiModal.id = 'btSaiModalFimJogo'
             btSaiModal.className = 'itensModalFimJogo'
             btSaiModal.innerHTML ='Fechar'
             btSaiModal.setAttribute('data-description', 'Fechar')
             btSaiModal.setAttribute('onclick', 'limpaModal()')
             
-            modal.appendChild(btSaiModal)
-            setTimeout(() => btSaiModal.style.display = 'block', 0.7 * 4 * 1000)
+            divBotoes.appendChild(btSaiModal)
+            setTimeout(() => btSaiModal.style.display = 'block', 0.7 * 5 * 1000)
 
             const itensModalFimJogo = document.querySelectorAll('.itensModalFimJogo[data-description]')
             itensModalFimJogo.forEach(elemento => {
