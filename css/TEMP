@@ -39,7 +39,6 @@ body{
     background-color: rgb(255, 255, 255);
     transform: rotateY(180deg);
     border-radius: 10%;
-    box-shadow: 5px 5px 0 0 rgb(146, 37, 78);
 }
 img{
     width: 190px;
