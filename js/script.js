@@ -526,6 +526,7 @@ function fimJogo(){
             modal.appendChild(divBotoes)
 
             btReiniciaJogoModal.id = 'btReiniciaJogoModal'
+            btReiniciaJogoModal.className = 'itensModalFimJogo'
             btReiniciaJogoModal.innerHTML = 'Reiniciar jogo'
             btReiniciaJogoModal.setAttribute('data-description', 'Reiniciar jogo')
             btReiniciaJogoModal.onclick = function reiniciaJogo(){
