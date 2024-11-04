@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da memória</title>
-    <link rel="stylesheet" href="css/styleGENERAL.css">
-    <link rel="stylesheet" href="css/styleXS.css">
-    <link rel="stylesheet" href="css/styleSM.css">
-    <link rel="stylesheet" href="css/styleMD.css">
-    <link rel="stylesheet" href="css/styleLG.css">
-    <link rel="stylesheet" href="css/styleXL.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 </head>
@@ -18,23 +13,21 @@
     <div id="wrapper" class="user-select-none" unselectable="on" ></div>
     <br>
     <!-- <button id="testes" onclick="giraCartas()">girar todas as cartas</button> -->
-    <div id="timer" class="user-select-none" unselectable="on">TEMPO</div>
+    <div id="timer" class="user-select-none" unselectable="on" data-description="TEMPO">TEMPO</div>
     <div id="jogoMemoria" class="user-select-none" unselectable="on"></div>
     
    <button id="btregras" data-description="regras" tabindex="19" class="user-select-none" unselectable="on">REGRAS</button>
    <br>
    <button id="dica" data-description="dica" tabindex="20" class="user-select-none" unselectable="on">DICA</button>
     <br>
-    <div id="pontuacao" class="user-select-none" unselectable="on"></div>
-   <label for="tema" id="tematxt" class="user-select-none" unselectable="on">SELECIONE O TEMA: </label>
-   <br>
+    <div id="pontuacao" class="user-select-none" unselectable="on" data-description="Pontuação: 0"></div>
    <select id="tema" data-description="Selecione o tema" class="user-select-none" unselectable="on" tabindex="21">
     <option value="animal" data-description="animais" class="user-select-none" unselectable="on" tabindex="22">ANIMAIS</option>
     <option value="fruta"  data-description="frutas" class="user-select-none" unselectable="on" tabindex="23">FRUTAS</option>
    </select>
    <br>
-   <button type="button" id="btReiniciaJogo" data-description="Reiniciar jogo" class="user-select-none" unselectable="on">Reiniciar jogo</button>
-
+   <button type="button" id="btReiniciaJogo" data-description="Reiniciar jogo" class="user-select-none" unselectable="on">REINICIAR JOGO</button>
+   <div id="containerModalFimJogo"></div>
     <!--
     Modelo das cartas:
     <div class="container">
