@@ -11,13 +11,16 @@ let criando_as_cartas
 let funcao_coloca_imgs_cartas
 let funcao_atualiza_imagens
 let adicionando_event_listener_botao_tema
+    let soluc_prov_pt1
 let funcao_gira_cartas
 let funcao_ler_desc_elementos
+let soluc_prov_pt2
 let funcao_botao_regras
 let funcao_botao_dica
 let funcao_ler_texto
 let funcao_reiniciar_jogo
 let funcao_fim_jogo
+
 
 // Definição das imagens dos temas
 let temas = {
@@ -118,6 +121,9 @@ document.body.onkeyup = function(evento){
         elemento = document.activeElement.className == 'carta'? document.activeElement.firstChild:elemento
         //alert(document.activeElement.firstChild)
         lerDescricaoElemento(elemento)
+        if(elemento == tema){
+            leTemaAtual()
+        }
     }
 }
 
@@ -237,7 +243,11 @@ atualizarImagens()
 adicionando_event_listener_botao_tema
 // Atualiza as imagens ao mudar de tema
 tema.addEventListener('change', f = () =>{
-    lerTexto('tema atual:' + tema.value)
+    soluc_prov_pt1
+    // Solução provisória tema
+    lerTexto('Tema atual: ')
+    setTimeout(() => lerDescricaoElemento(tema.children[tema.selectedIndex]), 1.6 * 1000)
+
     Pontuacao.pontos = 0
     Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
     Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
@@ -354,6 +364,15 @@ function lerDescricaoElemento(elemento) {
     speechSynthesis.speak(enunciado);
 }
 
+// Solucao provisoria pt2
+soluc_prov_pt2
+tema.addEventListener('mouseover', leTemaAtual = () => {
+    setTimeout(() => {
+        lerTexto('Tema atual:')
+        setTimeout(() => lerDescricaoElemento(tema.children[tema.selectedIndex]), 1.6 * 1000)
+    }, 2.5 * 1000)
+})
+
 const elementosComDescricao = document.querySelectorAll('[data-description]');
 
 elementosComDescricao.forEach(elemento => {
@@ -429,6 +448,7 @@ dica.onclick = function(){
 // Função de ler texto
 funcao_ler_texto
 function lerTexto(texto) {
+    speechSynthesis.cancel()
     console.log(texto)
     const enunciado = new SpeechSynthesisUtterance(texto);
     speechSynthesis.speak(enunciado);

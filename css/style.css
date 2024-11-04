@@ -277,3 +277,8 @@ button, #pontuacao, #tema, #timer{
 .swal2-confirm{
     background-color:rgb(210, 109, 218); ;
 }
+
+/*Solução provisória adaptação máquina*/
+#btReiniciaJogo, #pontuacao{
+    font-size: x-large !important;
+}
