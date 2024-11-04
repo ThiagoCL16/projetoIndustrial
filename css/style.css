@@ -224,4 +224,7 @@ p{
         color: rgb(255, 0, 0)
     }
 }
+button, #pontuacao, #tema, #timer{
+  font-size: x-large;  
+}
 

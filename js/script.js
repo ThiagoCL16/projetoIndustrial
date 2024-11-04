@@ -237,6 +237,7 @@ atualizarImagens()
 adicionando_event_listener_botao_tema
 // Atualiza as imagens ao mudar de tema
 tema.addEventListener('change', f = () =>{
+    lerTexto('tema atual:' + tema.value)
     Pontuacao.pontos = 0
     Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
     Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
@@ -253,6 +254,12 @@ tema.addEventListener('change', f = () =>{
         }
     });
 });
+document.body.onkeydown = (evento) => {
+    let tecla = evento.key
+    alert(tecla)
+    if(document.activeElement == tema && (tecla == 'arrowUp' || tecla == 'arrowDown'))
+        lerTexto('Tema atual: ' + tema.value)
+}
 
 // Função de girar as cartas
 funcao_gira_cartas
