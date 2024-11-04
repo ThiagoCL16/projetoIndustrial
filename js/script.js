@@ -376,8 +376,15 @@ tema.addEventListener('mouseover', leTemaAtual = () => {
 const elementosComDescricao = document.querySelectorAll('[data-description]');
 
 elementosComDescricao.forEach(elemento => {
-    elemento.onmouseover =  function(){
-      lerDescricaoElemento(elemento);
+    if(elemento.tagName == 'IMG'){
+        elemento.onmouseover = function(){
+            lerDescricaoElemento(elemento.parentElement.parentElement.children[0])
+            setTimeout(() => lerDescricaoElemento(elemento), 2 * 1000)
+        }
+    } else {
+        elemento.onmouseover =  function(){
+            lerDescricaoElemento(elemento);
+        }
     }
 });
 
