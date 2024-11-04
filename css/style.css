@@ -212,10 +212,6 @@ p{
     cursor: pointer;
 }
 
-#btReiniciaJogoModal{
-
-}
-
 #msgAgradecimentoFimJogo{
     display: block;
     margin-top:20px;
@@ -262,14 +258,6 @@ p{
         color: rgb(255, 0, 68);
         scale: 1.0;
     }
-}
-
-#btReinicaJogoModal{
-
-}
-
-#btSaiModalFimJogo{
-
 }
 
 #pontuacaoModalFimJogo{
