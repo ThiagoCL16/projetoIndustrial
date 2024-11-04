@@ -295,6 +295,8 @@ function giraCarta(indice) {
                     let audioAcerto = new Audio('audio/acerto.mp3');
                     audioAcerto.volume = 1
                     audioAcerto.play();
+                    setTimeout(() => lerTexto('+10 pontos'), 5 * 1000)
+                    setTimeout(() => lerDescricaoElemento(Pontuacao.elemento), (5 + 2.5) * 1000)
                     Pontuacao.pontos += Pontuacao.acerto;
                     Pontuacao.elemento.innerHTML = `PONTUAÇÃO: ${Pontuacao.pontos}`;
                     Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
@@ -407,7 +409,9 @@ dica.onclick = function(){
     
         // Chama a função para falar a descrição
         lerTexto(descricaoCompleta);
-    } else {
+        setTimeout(() => lerTexto('-5 pontos'), 3 * 1000)
+        setTimeout(() => lerDescricaoElemento(Pontuacao.elemento), (3 + 2.5) * 1000)
+    } else { 
         console.error("Verso ou elemento não encontrado para a carta sorteada.");
     }
     
