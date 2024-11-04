@@ -254,12 +254,7 @@ tema.addEventListener('change', f = () =>{
         }
     });
 });
-document.body.onkeydown = (evento) => {
-    let tecla = evento.key
-    alert(tecla)
-    if(document.activeElement == tema && (tecla == 'arrowUp' || tecla == 'arrowDown'))
-        lerTexto('Tema atual: ' + tema.value)
-}
+
 
 // Função de girar as cartas
 funcao_gira_cartas
