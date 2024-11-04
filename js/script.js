@@ -531,10 +531,29 @@ function fimJogo(){
             modal.appendChild(divBotoes)
 
             btReiniciaJogoModal.id = 'btReiniciaJogoModal'
-            btReiniciaJogoModal.className = 'itensModalFimJogo'
             btReiniciaJogoModal.innerHTML = 'Reiniciar jogo'
             btReiniciaJogoModal.setAttribute('data-description', 'Reiniciar jogo')
-            btReiniciaJogoModal.setAttribute('onclick', 'reiniciaJogo()')
+            btReiniciaJogoModal.onclick = function reiniciaJogo(){
+                Pontuacao.pontos = 0
+                Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
+                Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
+            
+                Timer.ativo = false
+                Timer.segundos = Timer.minutos = 0
+                Timer.elemento.innerHTML = 'TEMPO'
+                Timer.elemento.setAttribute('data-description', 'Tempo')
+            
+                atualizarImagens()
+                const elementosComDescricao = document.querySelectorAll('[data-description]');
+            
+                elementosComDescricao.forEach(elemento => {
+                    elemento.onmouseover =  function(){
+                        lerDescricaoElemento(elemento);
+                    }
+                });
+
+                limpaModal();
+            }
 
             divBotoes.appendChild(btReiniciaJogoModal)
             setTimeout(() => btReiniciaJogoModal.style.display = 'block', 0.7 * 4 * 1000)

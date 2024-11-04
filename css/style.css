@@ -1,6 +1,8 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(248, 222, 106);
+    background: linear-gradient(-55deg, rgb(212, 25, 225), rgb(52, 210, 73), rgb(8, 230, 233));
+    min-height: 100vh;
+    /*ff91d9*/
 }
 .container{
     perspective: 600px;
@@ -28,26 +30,22 @@ body{
 }
 /* edicao do corpo das cartas*/
 [id^=frente]{
-    border: 1px solid rgb(40, 38, 35);
+    border: 4px solid rgb(40, 38, 35);
     position:absolute;
     border-radius: 5%;
-    box-shadow: 5px 5px 0 0 rgb(185, 106, 2);
     background-color: white; 
     font-size: 40px;
     text-align: center;
     font-style: helvetica;
-    background-image: url("../img/kk_family_finalizada.jpeg");
+    background-image: url("../img/logo.jpg");
     background-size: cover;
     background-position: center;
-    background-image: url("../img/kk_family_finalizada.jpeg");
-    background-size: cover;
-    background-position: center;
+    cursor: pointer;
 }
 [id^=verso]{
     background-color: white;
     transform: rotateY(180deg);
     border-radius: 10%;
-    box-shadow: 5px 5px 0 0 rgb(185, 106, 2);
 }
 img{
     width: 190px;
@@ -90,19 +88,23 @@ p{
     display: block;
 }
 
-#tema,button, #timer{
-    color:rgb(255, 255, 255);
-    background-color: #000000;
+#tema, #timer, #pontuacao, #btregras, #dica, #btReiniciaJogo, #btReiniciaJogoModal{
+    color: rgb(255, 255, 255);
+    background-color: rgb(210, 109, 218);
     padding: 20px;
     border: 4px solid;
     border-radius: 30px;
     font-size: 35px;
-    border-color: white;
+    border-color: rgb(255, 255, 255);
+    margin-bottom: 5px;
+    width: fit-content;
 }
 
-#pontuacao, #timer, #tematxt{
-    font-size: 30px;
-    width: fit-content;
+#tema:hover, #btregras:hover, #dica:hover, #btReiniciaJogo:hover, #button:hover, #btReiniciaJogoModal:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(4, 0, 255);
+    border-color: rgb(255, 255, 255);
+    cursor: pointer;
 }
 
 #timer{
@@ -155,11 +157,19 @@ p{
     position: absolute;
     margin-left:auto;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0);
     transition: background-color 500ms;
     left:50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    background: linear-gradient(-55deg, rgb(212, 25, 225), rgb(52, 210, 73), rgb(8, 230, 233));
+    border-radius: 10%;
+    border: 4px solid white;
+    flex-direction: column;
+}
+
+#pontuacaoModalFimJogo, #timerModalFimJogo, #btSaiModalFimJogo, #divBotoesModalFimJogo{
+    margin-top: 10px;
+    margin-bottom: 50px;
 }
 
 .itensModalFimJogo{
@@ -170,38 +180,42 @@ p{
 }
 
 .itensModalFimJogo:not(button){
-    color:rgba(0, 0, 0, 0);
+    color:white;
     transition: color 500ms;
-    margin-top: 20px;
 }
 
 #divBotoesModalFimJogo{
     width: 427px;
     height: 90px;
-    margin: 20px auto auto auto
-}
+    margin: 20px auto auto auto;
 
-#divBotoesModalFimJogo>*{
-    float: left;
-    margin: 0 !important
 }
 
 #btSaiModalFimJogo, #btReiniciaJogoModal{
     display:none;
-    transition: display 500ms
+    transition: display 500ms;
+    float:none;
+    margin: auto;
 }
 
 #btSaiModalFimJogo{
-    background-color: red;
+    margin-top: 50px;
+    font-size: 20px;
+    color: black;
+    text-decoration: underline;
+    background-color: rgba(0,0,0,0);
+    border: 0px;
 }
 
-#btReiniciaJogoModal{
-    margin-right: 10px;
+#btSaiModalFimJogo:hover{
+    color: blue;
+    cursor: pointer;
 }
 
 #msgAgradecimentoFimJogo{
     display: block;
     margin-top:20px;
+    margin-bottom: 115px;
 }
 
 .muda-de-cor{
@@ -212,19 +226,54 @@ p{
 
 @keyframes mudaCor{
     0%{
-        color:rgb(255, 0, 0)
+        color:rgb(255, 0, 0);
+        scale: 1.0;
     }
-    33.3%{
-        color: rgb(0, 255, 0)
+    10%{
+        color: rgb(255, 123, 0)
     }
-    66.7%{
-        color: rgb(0, 0, 255)
+    10%{
+        color: rgb(255, 251, 0)
+    }
+    10%{
+        color: rgb(89, 255, 0)
+    }
+    10%{
+        color: rgb(0, 255, 102)
+    }
+    50%{
+        color: #00ffcc;
+        scale: 3;
+    }
+    10%{
+        color: rgb(0, 170, 255)
+    }
+    10%{
+        color: rgb(0, 34, 255)
+    }
+    10%{
+        color: rgb(191, 0, 255)
     }
     100%{
-        color: rgb(255, 0, 0)
+        color: rgb(255, 0, 68);
+        scale: 1.0;
     }
 }
 button, #pontuacao, #tema, #timer{
   font-size: x-large;  
 }
 
+#pontuacaoModalFimJogo{
+    font-size: 40px;
+    color:rgba(0, 0, 0, 0);
+}
+
+#timerModalFimJogo{
+    font-size: 40px;
+    color:rgba(0, 0, 0, 0);
+    margin-bottom: 75px;
+}
+
+.swal2-confirm{
+    background-color:rgb(210, 109, 218); ;
+}
