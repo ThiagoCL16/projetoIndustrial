@@ -121,10 +121,16 @@ p{
     font-size: 30px; /* Aumenta o tamanho da fonte do texto */
 }
 
-.btsairregras {
+.texto {
     font-size: 45px; /* Aumenta o tamanho da fonte do botão */
     padding: 20px 20px; /* Adiciona um pouco de espaçamento ao botão */
     border-radius: 5px;
+    width: 600px;
+    height: 600px;
+}
+
+.swal2-popup{
+    scale: 1.75;
 }
 
 .modal-custom {
@@ -200,7 +206,7 @@ p{
 
 #btSaiModalFimJogo{
     margin-top: 50px;
-    font-size: 20px;
+    font-size: 35px;
     color: black;
     text-decoration: underline;
     background-color: rgba(0,0,0,0);
@@ -220,42 +226,18 @@ p{
 
 .muda-de-cor{
     animation-name: mudaCor;
-    animation-duration: 3s;
+    animation-duration: 5s;
     animation-iteration-count: infinite;
 }
 
 @keyframes mudaCor{
     0%{
-        color:rgb(255, 0, 0);
         scale: 1.0;
     }
-    10%{
-        color: rgb(255, 123, 0)
-    }
-    10%{
-        color: rgb(255, 251, 0)
-    }
-    10%{
-        color: rgb(89, 255, 0)
-    }
-    10%{
-        color: rgb(0, 255, 102)
-    }
     50%{
-        color: #00ffcc;
         scale: 3;
     }
-    10%{
-        color: rgb(0, 170, 255)
-    }
-    10%{
-        color: rgb(0, 34, 255)
-    }
-    10%{
-        color: rgb(191, 0, 255)
-    }
     100%{
-        color: rgb(255, 0, 68);
         scale: 1.0;
     }
 }
@@ -263,9 +245,11 @@ p{
 #pontuacaoModalFimJogo{
     font-size: 40px;
     color:rgba(0, 0, 0, 0);
+    font-weight: bold;
 }
 
 #timerModalFimJogo{
+    font-weight: bold;
     font-size: 40px;
     color:rgba(0, 0, 0, 0);
     margin-bottom: 75px;

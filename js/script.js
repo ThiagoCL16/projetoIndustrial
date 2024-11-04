@@ -363,12 +363,12 @@ elementosComDescricao.forEach(elemento => {
 // Função do botão de regras
 funcao_botao_regras
 document.getElementById("btregras").addEventListener("click", function() {
-    const regrasDescricao = "O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência visual. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela";
+    const regrasDescricao = "O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas cegas ou de visão subnormal. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela. Além disso, a cada acerto você ganha mais 10 pontos, e se você usar a dica perderá 5 pontos. Você tem a opção de se locomover pelo jogo com tab.";
 
     Swal.fire({
         title: 'Regras do Jogo',
         html:
-        '<div id="textoRegras" data-description="' + regrasDescricao + '">O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência visual. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. <br>Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela </div>',
+        '<div id="textoRegras" data-description="' + regrasDescricao + '">O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas cegas ou de visão subnormal. <br>Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela. Além disso, a cada acerto você ganha mais 10 pontos, e se você usar a dica perderá 5 pontos. Você tem a opção de se locomover pelo jogo com tab. </div>',
         confirmButtonText: 'sair', 
         background: '#000',
         color: '#fff',
