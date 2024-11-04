@@ -114,18 +114,6 @@ class carta{
         this.Verso = Verso
     }
 }
-document.body.onkeyup = function(evento){
-    let tecla = evento.key
-    if(tecla == 'Tab'){
-        let elemento = document.activeElement.className == 'container'? document.activeElement.firstChild:document.activeElement
-        elemento = document.activeElement.className == 'carta'? document.activeElement.firstChild:elemento
-        //alert(document.activeElement.firstChild)
-        lerDescricaoElemento(elemento)
-        if(elemento == tema){
-            leTemaAtual()
-        }
-    }
-}
 
 class verso{
     constructor(elemento, indice, img){
@@ -168,6 +156,23 @@ for(i=0; i<18; i++) { //laco da base das cartas
     Verso[i] = new verso(elementoVerso, i, img[i])
     Carta[i] = new carta(elementoCarta, i)
     texto[i] = ""
+}
+
+document.body.onkeyup = function(evento){
+    let tecla = evento.key
+    if(tecla == 'Tab'){
+        let elemento = document.activeElement.className == 'container'? document.activeElement.firstChild:document.activeElement
+        elemento = document.activeElement.className == 'carta'? document.activeElement.firstChild:elemento
+        console.log(elemento)
+        //alert(document.activeElement.firstChild)
+        lerDescricaoElemento(elemento)
+        if(elemento == tema){
+            leTemaAtual()
+        }
+        if(elemento.className == 'lado' && Carta[(elemento.parentElement.tabIndex - 1)].virada == true){
+            setTimeout(() => lerDescricaoElemento(elemento.parentElement.children[1].firstChild), 2 * 1000)
+        }
+    }
 }
 
 funcao_coloca_imgs_cartas
