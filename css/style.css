@@ -88,7 +88,7 @@ p{
     display: block;
 }
 
-#tema, #timer, #pontuacao, #btregras, #dica, #btReiniciaJogo, #btReiniciaJogoModal{
+#tema, #timer, #pontuacao, #btregras, #dica, #btReiniciaJogo, #btReiniciaJogoModal, #divSelect{
     color: rgb(255, 255, 255);
     background-color: rgb(210, 109, 218);
     padding: 20px;
@@ -100,7 +100,7 @@ p{
     width: fit-content;
 }
 
-#tema:hover, #btregras:hover, #dica:hover, #btReiniciaJogo:hover, #button:hover, #btReiniciaJogoModal:hover{
+#divSelect:hover, .opcoes:hover, #btregras:hover, #dica:hover, #btReiniciaJogo:hover, #button:hover, #btReiniciaJogoModal:hover{
     color: rgb(255, 255, 255);
     background-color: rgb(4, 0, 255);
     border-color: rgb(255, 255, 255);
@@ -121,10 +121,16 @@ p{
     font-size: 30px; /* Aumenta o tamanho da fonte do texto */
 }
 
-.btsairregras {
+.texto {
     font-size: 45px; /* Aumenta o tamanho da fonte do botão */
     padding: 20px 20px; /* Adiciona um pouco de espaçamento ao botão */
     border-radius: 5px;
+    width: 600px;
+    height: 600px;
+}
+
+.swal2-popup{
+    scale: 1.75;
 }
 
 .modal-custom {
@@ -200,7 +206,7 @@ p{
 
 #btSaiModalFimJogo{
     margin-top: 50px;
-    font-size: 20px;
+    font-size: 35px;
     color: black;
     text-decoration: underline;
     background-color: rgba(0,0,0,0);
@@ -220,52 +226,33 @@ p{
 
 .muda-de-cor{
     animation-name: mudaCor;
-    animation-duration: 3s;
+    animation-duration: 5s;
     animation-iteration-count: infinite;
 }
 
 @keyframes mudaCor{
     0%{
-        color:rgb(255, 0, 0);
         scale: 1.0;
-    }
-    10%{
-        color: rgb(255, 123, 0)
-    }
-    10%{
-        color: rgb(255, 251, 0)
-    }
-    10%{
-        color: rgb(89, 255, 0)
-    }
-    10%{
-        color: rgb(0, 255, 102)
     }
     50%{
-        color: #00ffcc;
         scale: 3;
     }
-    10%{
-        color: rgb(0, 170, 255)
-    }
-    10%{
-        color: rgb(0, 34, 255)
-    }
-    10%{
-        color: rgb(191, 0, 255)
-    }
     100%{
-        color: rgb(255, 0, 68);
         scale: 1.0;
     }
+}
+button, #pontuacao, #tema, #timer{
+  font-size: x-large;  
 }
 
 #pontuacaoModalFimJogo{
     font-size: 40px;
     color:rgba(0, 0, 0, 0);
+    font-weight: bold;
 }
 
 #timerModalFimJogo{
+    font-weight: bold;
     font-size: 40px;
     color:rgba(0, 0, 0, 0);
     margin-bottom: 75px;
@@ -273,4 +260,39 @@ p{
 
 .swal2-confirm{
     background-color:rgb(210, 109, 218); ;
+}
+
+/*Solução provisória adaptação máquina*/
+#btReiniciaJogo, #pontuacao, #divSelect, .opcoes{
+    font-size: x-large !important;
+}
+
+#btReiniciaJogo{
+    margin-top:32px;
+}
+
+.opcoes{
+    display: none;
+    z-index: 3;
+    background-color: rgb(210, 109, 218);
+}
+#divSelect, .opcoes{
+    width: 160px;
+    height: 50px;
+    color:white;
+    float:left;
+    padding: 15px 0 0 5px;
+    position: relative;
+}
+#divSelect{
+    margin:0;
+    border:5px solid white;
+    z-index: 2;
+    padding: 20px;
+    height: fit-content;
+}
+#selectTema{
+    height:50px;
+    width:150px;
+    float: left;
 }

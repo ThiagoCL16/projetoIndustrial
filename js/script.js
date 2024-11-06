@@ -1,5 +1,6 @@
-const tema = document.getElementById('tema');
-const botao = document.getElementById('btmudartema');
+let divSelect = document.getElementById('divSelect') // visual
+let selectTema = document.getElementById('selectTema')
+let opcoes = [document.getElementsByClassName('opcoes')[0],document.getElementsByClassName('opcoes')[1]]
 let img = new Array(16)
 
 
@@ -11,13 +12,16 @@ let criando_as_cartas
 let funcao_coloca_imgs_cartas
 let funcao_atualiza_imagens
 let adicionando_event_listener_botao_tema
+    let soluc_prov_pt1
 let funcao_gira_cartas
 let funcao_ler_desc_elementos
+let soluc_prov_pt2
 let funcao_botao_regras
 let funcao_botao_dica
 let funcao_ler_texto
 let funcao_reiniciar_jogo
 let funcao_fim_jogo
+
 
 // Definição das imagens dos temas
 let temas = {
@@ -111,15 +115,6 @@ class carta{
         this.Verso = Verso
     }
 }
-document.body.onkeyup = function(evento){
-    let tecla = evento.key
-    if(tecla == 'Tab'){
-        let elemento = document.activeElement.className == 'container'? document.activeElement.firstChild:document.activeElement
-        elemento = document.activeElement.className == 'carta'? document.activeElement.firstChild:elemento
-        //alert(document.activeElement.firstChild)
-        lerDescricaoElemento(elemento)
-    }
-}
 
 class verso{
     constructor(elemento, indice, img){
@@ -164,6 +159,23 @@ for(i=0; i<18; i++) { //laco da base das cartas
     texto[i] = ""
 }
 
+document.body.onkeyup = function(evento){
+    let tecla = evento.key
+    if(tecla == 'Tab'){
+        let elemento = document.activeElement.className == 'container'? document.activeElement.firstChild:document.activeElement
+        elemento = document.activeElement.className == 'carta'? document.activeElement.firstChild:elemento
+        console.log(elemento)
+        //alert(document.activeElement.firstChild)
+        lerDescricaoElemento(elemento)
+        if(elemento == selectTema){
+            leTemaAtual()
+        }
+        if(elemento.className == 'lado' && Carta[(elemento.parentElement.tabIndex - 1)].virada == true){
+            setTimeout(() => lerDescricaoElemento(elemento.parentElement.children[1].firstChild), 2 * 1000)
+        }
+    }
+}
+
 funcao_coloca_imgs_cartas
 // Função de colocar as imagens nas cartas
 function colocaImgsCartas(){
@@ -195,7 +207,7 @@ function colocaImgsCartas(){
 // Função atualiza imagens
 funcao_atualiza_imagens
 function atualizarImagens() {
-    const temaSelecionado = tema.value;
+    const temaSelecionado = selectTema.getAttribute('value');
     img.length = 0; // Limpa o array img
     Pontuacao.pontos = 0
     Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
@@ -236,7 +248,12 @@ atualizarImagens()
 
 adicionando_event_listener_botao_tema
 // Atualiza as imagens ao mudar de tema
-tema.addEventListener('change', f = () =>{
+function mudaTema(){
+    soluc_prov_pt1
+    // Solução provisória tema
+    lerTexto('Tema atual: ')
+    setTimeout(() => lerTexto(divSelect.innerHTML), 1.6 * 1000)
+
     Pontuacao.pontos = 0
     Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
     Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
@@ -252,7 +269,8 @@ tema.addEventListener('change', f = () =>{
             lerDescricaoElemento(elemento);
         }
     });
-});
+};
+
 
 // Função de girar as cartas
 funcao_gira_cartas
@@ -352,23 +370,41 @@ function lerDescricaoElemento(elemento) {
     speechSynthesis.speak(enunciado);
 }
 
+// Solucao provisoria pt2
+soluc_prov_pt2
+function leTemaAtual(){
+    setTimeout(() => {
+        lerTexto('Tema atual:')
+        setTimeout(() => lerTexto(divSelect.innerHTML), 1.7 * 1000)
+    }, 2.6 * 1000)
+}
+divSelect.addEventListener('mouseover', leTemaAtual)
+
+    
 const elementosComDescricao = document.querySelectorAll('[data-description]');
 
 elementosComDescricao.forEach(elemento => {
-    elemento.onmouseover =  function(){
-      lerDescricaoElemento(elemento);
+    if(elemento.tagName == 'IMG'){
+        elemento.onmouseover = function(){
+            lerDescricaoElemento(elemento.parentElement.parentElement.children[0])
+            setTimeout(() => lerDescricaoElemento(elemento), 2 * 1000)
+        }
+    } else {
+        elemento.onmouseover =  function(){
+            lerDescricaoElemento(elemento);
+        }
     }
 });
 
 // Função do botão de regras
 funcao_botao_regras
 document.getElementById("btregras").addEventListener("click", function() {
-    const regrasDescricao = "O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência visual. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela";
+    const regrasDescricao = "O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas cegas ou de visão subnormal. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela. Além disso, a cada acerto você ganha mais 10 pontos, e se você usar a dica perderá 5 pontos. Você tem a opção de se locomover pelo jogo com tab.";
 
     Swal.fire({
         title: 'Regras do Jogo',
         html:
-        '<div id="textoRegras" data-description="' + regrasDescricao + '">O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas com algum grau de deficiência visual. Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. <br>Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela </div>',
+        '<div id="textoRegras" data-description="' + regrasDescricao + '">O objetivo do jogo é trabalhar a memória e o raciocinio de modo lúdico com adaptações para pessoas cegas ou de visão subnormal. <br>Para iniciar o jogo deve-se clicar em duas cartas distintas para achar o par correspondente das imagens, assim sucessivamente até todos os pares de cartas serem encontrados para finalizar o jogo. Há a opção de reiniciar o jogo ao final e durante a partida. Terá um cronômetro com o tempo rolando na tela. Além disso, a cada acerto você ganha mais 10 pontos, e se você usar a dica perderá 5 pontos. Você tem a opção de se locomover pelo jogo com tab. </div>',
         confirmButtonText: 'sair', 
         background: '#000',
         color: '#fff',
@@ -427,6 +463,7 @@ dica.onclick = function(){
 // Função de ler texto
 funcao_ler_texto
 function lerTexto(texto) {
+    speechSynthesis.cancel()
     console.log(texto)
     const enunciado = new SpeechSynthesisUtterance(texto);
     speechSynthesis.speak(enunciado);
@@ -524,6 +561,7 @@ function fimJogo(){
             modal.appendChild(divBotoes)
 
             btReiniciaJogoModal.id = 'btReiniciaJogoModal'
+            btReiniciaJogoModal.className = 'itensModalFimJogo'
             btReiniciaJogoModal.innerHTML = 'Reiniciar jogo'
             btReiniciaJogoModal.setAttribute('data-description', 'Reiniciar jogo')
             btReiniciaJogoModal.onclick = function reiniciaJogo(){
@@ -575,3 +613,56 @@ function fimJogo(){
         })
     }, 2 * 1000)
 }
+// Simulando select
+
+function mudaValueSelect(opcao){
+    const opcoes = [opcao.parentElement.children[1], opcao.parentElement.children[2]]
+
+    divSelect.innerHTML = opcao.innerHTML
+    opcao.parentElement.setAttribute('value', opcao.getAttribute('value'))
+
+
+    opcoes.forEach(opcao => {
+        opcao.style.display = 'none'
+    })
+}
+
+opcoes.forEach(opcao => {
+    opcao.addEventListener('click', () => {
+        mudaValueSelect(opcao)
+        mudaTema()
+    })
+    opcao.addEventListener('keydown', (evento) => {
+        const tecla = evento.key
+        if(tecla == 'Enter'){
+            mudaValueSelect(opcao)
+            mudaTema()
+        }
+    })
+})
+
+function mostraOcultaOpcoes(){
+    if(opcoes[0].style.display != 'block'){
+        opcoes.forEach(opcao => {
+            opcao.style.display = 'block'
+            opcao.addEventListener('click', () => mudaValueSelect(opcao))
+        })  
+    } else {
+        opcoes.forEach(opcao => {
+            opcao.style.display = 'none'
+        })
+    }
+}
+
+divSelect.onclick = mostraOcultaOpcoes
+document.body.addEventListener('keyup', function(evento){
+    const tecla = evento.key
+    console.log('elemento ativo: ' + document.activeElement + '\n' + tecla + selectTema.children[1].style.display)
+    if(document.activeElement == divSelect){
+        if(tecla == 'Tab'){
+            leTemaAtual()
+        } else if(tecla == 'Enter') {
+            mostraOcultaOpcoes()
+        }
+    }
+})
