@@ -310,7 +310,7 @@ function giraCarta(indice) {
                 if (imgCartaVirada == Verso[indice].img && Carta[indice].indice != cartaVirada.indice) {
                     // Par correto
                     let audioAcerto = new Audio('audio/acerto.mp3');
-                    audioAcerto.volume = 1
+                    audioAcerto.volume = 1;
                     audioAcerto.play();
                     setTimeout(() => lerTexto('+10 pontos'), 5 * 1000)
                     setTimeout(() => lerDescricaoElemento(Pontuacao.elemento), (5 + 2.5) * 1000)
@@ -484,6 +484,10 @@ function fimJogo(){
     // Criando o modal ("alert") de fim de jogo
     setTimeout(() => {
         let containerModal = document.getElementById('containerModalFimJogo')
+
+        let audioaplausos = new Audio('audio/aplausos.mp3');
+        audioaplausos.volume = 1;
+        audioaplausos.play();
         
         
         let fundoModal = document.createElement('div')
