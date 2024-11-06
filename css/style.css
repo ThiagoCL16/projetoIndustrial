@@ -151,7 +151,7 @@ p{
     background-color:rgba(0, 0, 0, 0);
     transition: background-color 500ms;
     width: auto;
-    z-index: 0;
+    z-index: 3;
     position: absolute;
     top:0;
     left:0
@@ -162,7 +162,7 @@ p{
     height: 600px;
     position: absolute;
     margin-left:auto;
-    z-index: 2;
+    z-index: 5;
     transition: background-color 500ms;
     left:50%;
     top: 50%;
@@ -273,7 +273,7 @@ button, #pontuacao, #tema, #timer{
 
 .opcoes{
     display: none;
-    z-index: 3;
+    z-index: 2;
     background-color: rgb(210, 109, 218);
 }
 #divSelect, .opcoes{
@@ -287,7 +287,7 @@ button, #pontuacao, #tema, #timer{
 #divSelect{
     margin:0;
     border:5px solid white;
-    z-index: 2;
+    z-index: 1;
     padding: 20px;
     height: fit-content;
 }

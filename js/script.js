@@ -13,7 +13,6 @@ let funcao_coloca_imgs_cartas
 let funcao_atualiza_imagens
 let adicionando_event_listener_botao_tema
     let soluc_prov_pt1
-let funcao_gira_cartas
 let funcao_ler_desc_elementos
 let soluc_prov_pt2
 let funcao_botao_regras
@@ -204,6 +203,9 @@ function colocaImgsCartas(){
     }
 }
 
+
+let cartaVirada, totalCartas, qtdCartaVirada, emVerificacao
+
 // Função atualiza imagens
 funcao_atualiza_imagens
 function atualizarImagens() {
@@ -240,8 +242,11 @@ function atualizarImagens() {
         Carta[i] = new carta(elementoCarta, i)
         texto[i] = ""
         Carta[i].virada = false
+        emVerificacao = false
     }
-    
+    cartaVirada = ''
+    qtdCartaVirada = 0
+    totalCartas = 18
     colocaImgsCartas()
 }
 atualizarImagens()
@@ -249,8 +254,6 @@ atualizarImagens()
 adicionando_event_listener_botao_tema
 // Atualiza as imagens ao mudar de tema
 function mudaTema(){
-    soluc_prov_pt1
-    // Solução provisória tema
     lerTexto('Tema atual: ')
     setTimeout(() => lerTexto(divSelect.innerHTML), 1.6 * 1000)
 
@@ -272,13 +275,9 @@ function mudaTema(){
 };
 
 
-// Função de girar as cartas
-funcao_gira_cartas
-
-let totalCartas = 18
-let cartaVirada
-let qtdCartaVirada = 0
-let emVerificacao = false; // Controle de verificação
+totalCartas = 18
+qtdCartaVirada = 0
+emVerificacao = false; // Controle de verificação
 
 function giraCarta(indice) {
     // Bloqueia novas viradas se já em verificação de um par
@@ -344,22 +343,6 @@ function giraCarta(indice) {
 
 let cartas = document.getElementsByClassName('carta');
 
-
-for(let carta of cartas) {
-    // Função apenas para testes
-    function giraCartas(){
-        for(let carta of cartas){
-            carta.style.transform = 'rotateY(180deg)'
-            setTimeout(voltaCartas, 5 * 1000)
-        }
-    }
-    function voltaCartas(){
-        for(let carta of cartas){
-            carta.style.transform = 'rotateY(0)'  
-        }
-         
-    }
-}
 
 // Função de ler descrição dos elementos
 funcao_ler_desc_elementos
