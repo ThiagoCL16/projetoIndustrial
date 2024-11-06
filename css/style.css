@@ -88,7 +88,7 @@ p{
     display: block;
 }
 
-#tema, #timer, #pontuacao, #btregras, #dica, #btReiniciaJogo, #btReiniciaJogoModal{
+#tema, #timer, #pontuacao, #btregras, #dica, #btReiniciaJogo, #btReiniciaJogoModal, #divSelect{
     color: rgb(255, 255, 255);
     background-color: rgb(210, 109, 218);
     padding: 20px;
@@ -100,7 +100,7 @@ p{
     width: fit-content;
 }
 
-#tema:hover, #btregras:hover, #dica:hover, #btReiniciaJogo:hover, #button:hover, #btReiniciaJogoModal:hover{
+#divSelect:hover, .opcoes:hover, #btregras:hover, #dica:hover, #btReiniciaJogo:hover, #button:hover, #btReiniciaJogoModal:hover{
     color: rgb(255, 255, 255);
     background-color: rgb(4, 0, 255);
     border-color: rgb(255, 255, 255);
@@ -263,6 +263,36 @@ button, #pontuacao, #tema, #timer{
 }
 
 /*Solução provisória adaptação máquina*/
-#btReiniciaJogo, #pontuacao{
+#btReiniciaJogo, #pontuacao, #divSelect, .opcoes{
     font-size: x-large !important;
+}
+
+#btReiniciaJogo{
+    margin-top:32px;
+}
+
+.opcoes{
+    display: none;
+    z-index: 3;
+    background-color: rgb(210, 109, 218);
+}
+#divSelect, .opcoes{
+    width: 160px;
+    height: 50px;
+    color:white;
+    float:left;
+    padding: 15px 0 0 5px;
+    position: relative;
+}
+#divSelect{
+    margin:0;
+    border:5px solid white;
+    z-index: 2;
+    padding: 20px;
+    height: fit-content;
+}
+#selectTema{
+    height:50px;
+    width:150px;
+    float: left;
 }

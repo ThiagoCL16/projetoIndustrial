@@ -1,5 +1,6 @@
-const tema = document.getElementById('tema');
-const botao = document.getElementById('btmudartema');
+let divSelect = document.getElementById('divSelect') // visual
+let selectTema = document.getElementById('selectTema')
+let opcoes = [document.getElementsByClassName('opcoes')[0],document.getElementsByClassName('opcoes')[1]]
 let img = new Array(16)
 
 
@@ -166,7 +167,7 @@ document.body.onkeyup = function(evento){
         console.log(elemento)
         //alert(document.activeElement.firstChild)
         lerDescricaoElemento(elemento)
-        if(elemento == tema){
+        if(elemento == selectTema){
             leTemaAtual()
         }
         if(elemento.className == 'lado' && Carta[(elemento.parentElement.tabIndex - 1)].virada == true){
@@ -206,7 +207,7 @@ function colocaImgsCartas(){
 // Função atualiza imagens
 funcao_atualiza_imagens
 function atualizarImagens() {
-    const temaSelecionado = tema.value;
+    const temaSelecionado = selectTema.getAttribute('value');
     img.length = 0; // Limpa o array img
     Pontuacao.pontos = 0
     Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
@@ -247,11 +248,11 @@ atualizarImagens()
 
 adicionando_event_listener_botao_tema
 // Atualiza as imagens ao mudar de tema
-tema.addEventListener('change', f = () =>{
+function mudaTema(){
     soluc_prov_pt1
     // Solução provisória tema
     lerTexto('Tema atual: ')
-    setTimeout(() => lerDescricaoElemento(tema.children[tema.selectedIndex]), 1.6 * 1000)
+    setTimeout(() => lerTexto(divSelect.innerHTML), 1.6 * 1000)
 
     Pontuacao.pontos = 0
     Pontuacao.elemento.innerHTML = 'PONTUAÇÃO: ' + Pontuacao.pontos
@@ -268,7 +269,7 @@ tema.addEventListener('change', f = () =>{
             lerDescricaoElemento(elemento);
         }
     });
-});
+};
 
 
 // Função de girar as cartas
@@ -371,13 +372,15 @@ function lerDescricaoElemento(elemento) {
 
 // Solucao provisoria pt2
 soluc_prov_pt2
-tema.addEventListener('mouseover', leTemaAtual = () => {
+function leTemaAtual(){
     setTimeout(() => {
         lerTexto('Tema atual:')
-        setTimeout(() => lerDescricaoElemento(tema.children[tema.selectedIndex]), 1.6 * 1000)
-    }, 2.5 * 1000)
-})
+        setTimeout(() => lerTexto(divSelect.innerHTML), 1.7 * 1000)
+    }, 2.6 * 1000)
+}
+divSelect.addEventListener('mouseover', leTemaAtual)
 
+    
 const elementosComDescricao = document.querySelectorAll('[data-description]');
 
 elementosComDescricao.forEach(elemento => {
@@ -610,3 +613,56 @@ function fimJogo(){
         })
     }, 2 * 1000)
 }
+// Simulando select
+
+function mudaValueSelect(opcao){
+    const opcoes = [opcao.parentElement.children[1], opcao.parentElement.children[2]]
+
+    divSelect.innerHTML = opcao.innerHTML
+    opcao.parentElement.setAttribute('value', opcao.getAttribute('value'))
+
+
+    opcoes.forEach(opcao => {
+        opcao.style.display = 'none'
+    })
+}
+
+opcoes.forEach(opcao => {
+    opcao.addEventListener('click', () => {
+        mudaValueSelect(opcao)
+        mudaTema()
+    })
+    opcao.addEventListener('keydown', (evento) => {
+        const tecla = evento.key
+        if(tecla == 'Enter'){
+            mudaValueSelect(opcao)
+            mudaTema()
+        }
+    })
+})
+
+function mostraOcultaOpcoes(){
+    if(opcoes[0].style.display != 'block'){
+        opcoes.forEach(opcao => {
+            opcao.style.display = 'block'
+            opcao.addEventListener('click', () => mudaValueSelect(opcao))
+        })  
+    } else {
+        opcoes.forEach(opcao => {
+            opcao.style.display = 'none'
+        })
+    }
+}
+
+divSelect.onclick = mostraOcultaOpcoes
+document.body.addEventListener('keyup', function(evento){
+    const tecla = evento.key
+    console.log('elemento ativo: ' + document.activeElement + '\n' + tecla + selectTema.children[1].style.display)
+    if(document.activeElement == divSelect){
+        if(tecla == 'Tab'){
+            leTemaAtual()
+        } else if(tecla == 'Enter') {
+            mostraOcultaOpcoes()
+        }
+    }
+})
