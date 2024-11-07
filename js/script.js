@@ -24,7 +24,7 @@ let funcao_fim_jogo
 
 // Definição das imagens dos temas
 let temas = {
-    animal: [
+    animais: [
         img[0] = '<img src="img/animais_jogo/abelha.com.png" class="user-select-none" data-description="abelha" title="abelha" alt="abelha" unselectable="on">',
         img[1] ='<img src="img/animais_jogo/arara.com.png" class="user-select-none" data-description="arara" title="arara" alt="arara" unselectable="on">',
         img[2] = '<img src="img/animais_jogo/barata.com.png" class="user-select-none" data-description="barata" title="barata" alt="barata" unselectable="on">',
@@ -42,7 +42,7 @@ let temas = {
         img[14] = '<img src="img/animais_jogo/tubarao.com.png" class="user-select-none" data-description="tubarao" title="tubarao" alt="tubarao" unselectable="on">',
         img[15] = '<img src="img/animais_jogo/veado.com.png" class="user-select-none" data-description="veado" title="veado" alt="veado" unselectable="on">',
     ],
-    fruta: [
+    frutas: [
         img[0] = '<img src="img/frutas_jogo/banana.jpg" data-description="banana" title="banana" alt="banana" unselectable="on">',
         img[1] = '<img src="img/frutas_jogo/abacate.jpg" data-description="abacate" title="abacate" alt="abacate" unselectable="on">',
         img[2] = '<img src="img/frutas_jogo/laranja.jpg" data-description="laranja" title="laranja" alt="laranja" unselectable="on">',
@@ -312,13 +312,37 @@ function giraCarta(indice) {
                     let audioAcerto = new Audio('audio/acerto.mp3');
                     audioAcerto.volume = 1;
                     audioAcerto.play();
-                    setTimeout(() => lerTexto('+10 pontos'), 5 * 1000)
-                    setTimeout(() => lerDescricaoElemento(Pontuacao.elemento), (5 + 2.5) * 1000)
+                    setTimeout(() => lerTexto('+ 10 pontos'), 1 * 1000)
+                    setTimeout(() => lerDescricaoElemento(Pontuacao.elemento), (1 + 2.5) * 1000)
                     Pontuacao.pontos += Pontuacao.acerto;
                     Pontuacao.elemento.innerHTML = `PONTUAÇÃO: ${Pontuacao.pontos}`;
                     Pontuacao.elemento.setAttribute('data-description', Pontuacao.elemento.innerHTML)
-                    cartaVirada.elemento.parentNode.innerHTML = "";
-                    Carta[indice].elemento.parentNode.innerHTML = "";
+                    cartaVirada.elemento.innerHTML = "";
+                    cartaVirada.elemento.setAttribute('data-description', `Carta ${cartaVirada.indice + 1} já feita`)
+                    Carta[indice].elemento.innerHTML = "";
+                    Carta[indice].elemento.setAttribute('data-description', `Carta ${indice + 1} já feita`) 
+                    cartaVirada.elemento.onmouseover =  function(){
+                        lerDescricaoElemento(cartaVirada.elemento);
+                    }
+                    Carta[indice].elemento.onmouseover =  function(){
+                        lerDescricaoElemento(Carta[indice].elemento);
+                    }
+                    document.body.onkeyup = function(evento){
+                        let tecla = evento.key
+                        if(tecla == 'Tab'){
+                            let elemento = document.activeElement.className == 'container'? document.activeElement.firstChild:document.activeElement
+                            elemento = document.activeElement.className == 'carta' && elemento.innerHTML? document.activeElement.firstChild:elemento
+                            console.log(elemento)
+                            //alert(document.activeElement.firstChild)
+                            lerDescricaoElemento(elemento)
+                            if(elemento == selectTema){
+                                leTemaAtual()
+                            }
+                            if(elemento.className == 'lado' && Carta[(elemento.parentElement.tabIndex - 1)].virada == true){
+                                setTimeout(() => lerDescricaoElemento(elemento.parentElement.children[1].firstChild), 2 * 1000)
+                            }
+                        }
+                    }
                     totalCartas -= 2;
                     if (totalCartas == 0) {
                         fimJogo();
@@ -347,7 +371,7 @@ let cartas = document.getElementsByClassName('carta');
 // Função de ler descrição dos elementos
 funcao_ler_desc_elementos
 function lerDescricaoElemento(elemento) {
-    console.log(elemento)
+    console.log(elemento.dataset.description)
     speechSynthesis.cancel()
     const enunciado = new SpeechSynthesisUtterance(elemento.dataset.description);
     speechSynthesis.speak(enunciado);
@@ -356,10 +380,7 @@ function lerDescricaoElemento(elemento) {
 // Solucao provisoria pt2
 soluc_prov_pt2
 function leTemaAtual(){
-    setTimeout(() => {
-        lerTexto('Tema atual:')
-        setTimeout(() => lerTexto(divSelect.innerHTML), 1.7 * 1000)
-    }, 2.6 * 1000)
+    setTimeout(() => lerTexto(divSelect.innerHTML), 2.6 * 1000)
 }
 divSelect.addEventListener('mouseover', leTemaAtual)
 
@@ -447,8 +468,8 @@ dica.onclick = function(){
 funcao_ler_texto
 function lerTexto(texto) {
     speechSynthesis.cancel()
-    console.log(texto)
-    const enunciado = new SpeechSynthesisUtterance(texto);
+    console.log(texto.toLowerCase())
+    const enunciado = new SpeechSynthesisUtterance(texto.toLowerCase());
     speechSynthesis.speak(enunciado);
 }
 
@@ -605,7 +626,7 @@ function fimJogo(){
 function mudaValueSelect(opcao){
     const opcoes = [opcao.parentElement.children[1], opcao.parentElement.children[2]]
 
-    divSelect.innerHTML = opcao.innerHTML
+    divSelect.innerHTML = 'Tema atual: ' + opcao.innerHTML
     opcao.parentElement.setAttribute('value', opcao.getAttribute('value'))
 
 
