@@ -272,8 +272,15 @@ button, #pontuacao, #timer{
 }
 
 #btReiniciaJogo{
-    margin: 5px 200px 0 5px;
+    margin: 5px 0 0 5px;
     float: left;
+    width: 250px;
+    height: 75px;
+}
+
+#selectTema{
+    float:left;
+    margin-right: 30px;
 }
 #btMutaFala{
     width: 20px;
@@ -313,4 +320,9 @@ button, #pontuacao, #timer{
 
 #divSelect, #pontuacao, #btReiniciajogo{
     font-weight: bold;
+}
+
+#wrapper{
+    width: 255px;
+    height: fit-content;
 }
