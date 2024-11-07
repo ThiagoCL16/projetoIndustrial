@@ -3,6 +3,7 @@ body{
     background: linear-gradient(-55deg, rgb(212, 25, 225), rgb(52, 210, 73), rgb(8, 230, 233));
     min-height: 100vh;
     /*ff91d9*/
+    margin: 0
 }
 .container{
     perspective: 600px;
@@ -88,7 +89,7 @@ p{
     display: block;
 }
 
-#timer, #pontuacao, #btregras, #dica, #btReiniciaJogo, #btReiniciaJogoModal, #divSelect{
+#timer, #pontuacao, #btregras, #dica, #btReiniciaJogo, #btReiniciaJogoModal, #btMutaFala, #divSelect{
     color: rgb(255, 255, 255);
     background-color: rgb(210, 109, 218);
     padding: 20px;
@@ -98,6 +99,9 @@ p{
     border-color: rgb(255, 255, 255);
     margin-bottom: 5px;
     width: fit-content;
+}
+#btregras, #dica, #pontuacao, #selectTema, #btReiniciaJogo{
+    margin-left: 5px;
 }
 
 #divSelect:hover, .opcoes:hover, #btregras:hover, #dica:hover, #btReiniciaJogo:hover, #button:hover, #btReiniciaJogoModal:hover{
@@ -268,7 +272,15 @@ button, #pontuacao, #timer{
 }
 
 #btReiniciaJogo{
-    margin-top:5px;
+    margin: 5px 200px 0 5px;
+    float: left;
+}
+#btMutaFala{
+    width: 20px;
+    height: 20px;
+    float:left;
+    position: relative;
+    margin-top: 5px;
 }
 
 .opcoes{
